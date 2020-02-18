@@ -31,7 +31,7 @@ class cslFleetMov {
             x = x[0].getElementsByClassName('tooltipHTML');
             x = x[0].getAttribute('title');
             x = x.split('| ')[1].replace('<br>',' ');
-            this._arrival_datetime = get_FormattedLocalTime(new Date(x), true);
+            this._arrival_datetime = x;
         }
 
         set data_return(x) {
