@@ -16,6 +16,7 @@ function get_DateFromDOM_Stirng(sDOM) {
     if ( sDOM.indexOf('| ') > 0 ) { sDOM = sDOM.split('| ')[1]; }
 
     // Split the DOM String in Date & Time
+    console.log(' DOM String : ' + sDOM);
     const dataString = sDOM.split(' ');
     // Date
     const dataStringDate = dataString[0].split('.');
