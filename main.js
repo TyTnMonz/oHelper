@@ -2,16 +2,6 @@
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
 
-        console.log('localstorage: ' + checkSupport());
-
-        localStorage.setItem('myCat', 'Tom');
-        localStorage['another-key'] = '42' ;
-        console.log('m-key : ' + localStorage.getItem('myCat'));
-        console.log('another-key : ' + localStorage['another-key']);
-
-        // console.log('moment lcoale: ' + moment.locale());
-        //console.log('moment : ' + moment('13.02.2020 14:19:35','DD.MM.YYYY hh:mm:ss').format('MMMM Do YYYY, h:mm:ss a'));
-
         // Adding CSS Resources for Script Implementations
         create_CSS_Style();
 
