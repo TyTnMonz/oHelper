@@ -3,41 +3,27 @@ class cslFleetMov {
             this._id = id;
         }
 
-        get start_coords() {
-            return this._start_coords;
-        }
-        set start_coords(x) {
-            this._start_coords = x;
-        }
+        // Start Coords
+        get start_coords() { return this._start_coords; }
+        set start_coords(x) { this._start_coords = x; }
 
-        get final_coords() {
-            return this._final_coords;
-        }
-        set final_coords(x) {
-            this._final_coords = x;
-        }
+        // Final Coords
+        get final_coords() { return this._final_coords; }
+        set final_coords(x) { this._final_coords = x; }
 
-        get starting_datetime() {
-            return this._starting_datetime;
-        }
-        set starting_datetime(x) {
-            this._starting_datetime = x;
-        }
+        // Starting DateTime
+        get starting_datetime() { return this._starting_datetime; }
+        set starting_datetime(x) { this._starting_datetime = get_DateFromDOM_Stirng(x); }
 
-        get arrival_datetime() {
-            return this._arrival_datetime;
-        }
-        set arrival_datetime(x) {
-            x = x[0].getElementsByClassName('tooltipHTML');
-            x = x[0].getAttribute('title');
-            x = x.split('| ')[1].replace('<br>',' ');
-            this._arrival_datetime = x;
-        }
+        // Arrival DateTime
+        get arrival_datetime() { return this._arrival_datetime; }
+        set arrival_datetime(x) { this._arrival_datetime = get_DateFromDOM_Stirng(x); }
 
-        set data_return(x) {
-            this._data_return = x;
-        }
-        get isOnWayBack() {
-            return ( this._data_return == '1' ) ? true:false;
-        }
+        // Mission End DateTime
+        get mission_end_datetime(){ return this._mission_end_datetime; }
+        set mission_end_datetime(x) { this._mission_end_datetime = get_DateFromDOM_Stirng(x); }
+
+        // Data about Mission
+        set data_return(x) { this._data_return = x; }
+        get isOnWayBack() {   return ( this._data_return == '1' ) ? true:false; }
     }
