@@ -20,8 +20,13 @@ class cslFleetMov {
         set arrival_datetime(x) { this._arrival_datetime = get_DateFromDOM_Stirng(x); }
 
         // Mission End DateTime
-        get mission_end_datetime(){ return this._mission_end_datetime; }
+        get mission_end_datetime() { return this._mission_end_datetime; }
         set mission_end_datetime(x) { this._mission_end_datetime = get_DateFromDOM_Stirng(x); }
+
+        // Recall Landing recall_datetime
+        get recall_datetime() {
+
+        }
 
         // Data about Mission
         set data_return(x) { this._data_return = x; }

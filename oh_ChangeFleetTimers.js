@@ -1,3 +1,32 @@
+function set_absTime(el, oDate) {
+    // Get the child <span> for Arrival Time to modify
+    let absTime = el.getElementsByClassName('absTime');
+    absTime[0].setAttribute('original', absTime[0].innerHTML.split(' ')[0]);
+    absTime[0].innerHTML = oDate.toLocaleTimeString();
+}
+
+function set_nextAbsTime(el, oDate) {
+    let missionEnd = el.getElementsByClassName('nextTimer tooltip');
+    if (typeof missionEnd !== 'undefined' && missionEnd !== null && missionEnd.length == 1 ) {
+        missionEnd = missionEnd[0].getAttribute('title');
+        let nextAbsTime = el.getElementsByClassName('nextabsTime');
+        if (typeof nextAbsTime !== 'undefined' && nextAbsTime !== null && nextAbsTime.length == 1 ) {
+            nextAbsTime[0].setAttribute('original', missionEnd);
+            nextAbsTime[0].innerHTML = oDate.toLocaleTimeString();
+        }
+    }
+}
+
+function set_callBackTime(el, oData) {
+    let callBackTime = el.getElementsByClassName('icon_link');
+    if (typeof callBackTime !== 'undefined' && callBackTime !== null && callBackTime.length == 1 ) {
+        // Adding Time to nextMission TAG
+        let nextMission = el.getElementsByClassName('nextMission');
+        nextMission[0].setAttribute('style', 'font-size: 8px;');
+        nextMission[0].innerHTML = 'Return ' + oData.toLocaleDateTimeString();
+    }
+}
+
 function changeFleetMovementsTimers(doEverythings = true) {
     // Getting mainDiv for Fleet Movements
     let mainDiv = document.getElementById('inhalt');
