@@ -4,7 +4,7 @@ class clsFleetMov {
       this._id = id;
     }
 
-    // Origin Coords
+    // Origin Coords 
     get start_coords() { return this._start_coords; }
     set start_coords(x) { this._start_coords = x; }
 
