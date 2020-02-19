@@ -1,0 +1,83 @@
+/* Custom CSS Styles for OGame Helper */
+
+.oh_Countdown_desc {
+  margin-left: 54px;
+  color: #6f9fc8;
+}
+
+.oh_Countdown_time {
+  margin-left: 54px;
+  color: #9c0!important;
+}
+
+.customMoonLink {
+  left: 110px;
+  top: 10px;
+  position: absolute;
+}
+
+div.customRSS_divMain {
+  width: 95%;
+  margin-left: 12px;
+}
+
+table.customRSS_tableMain {
+  width: 100%;
+  border: 0px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+table.customRSS_tableRes {
+  width: 50%;
+  cellspacing: 0px;
+  cellpadding: 0px;
+  border: 0px;
+}
+
+table td.customRSS_tableRes_Header {
+  text-align: center;
+  width: 50%;
+  padding: 2px 0px 2px 0px;
+  border: 1px solid #6f9fc8;
+  border-bottom: 0px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+span.customRSS_tableRes_Header {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #ffffff;
+}
+
+table td.customRSS_tableRes_resName {
+  font-size: 12px;
+  text-align: center;
+  width: 33%;
+  font-weight: normal;
+  color: #6f9fc8;
+  padding: 2px 0px 2px 0px;
+  border-left: 1px solid #6f9fc8;
+  border-right: 1px solid #6f9fc8;
+}
+
+table td.customRSS_tableRes_resValue {
+  font-size: 11px;
+  text-align: center;
+  width: 33%;
+  font-weight: normal;
+  color: #9c0!important;
+  padding: 2px 0px 2px 0px;
+  border-left: 1px solid #6f9fc8;
+  border-right: 1px solid #6f9fc8;
+}
+
+div.localClock {
+  width: 100%;
+  text-align: right;
+  display: block;
+  color: #848484;
+  font-weight: 700;
+  font-size: 11px;
+}
