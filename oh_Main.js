@@ -9,9 +9,9 @@
 
 // @require      https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js
 // @match        *://*/*
-// @require      file://C:\Users\MaMonza\OGame\oHelper\oh_Utils.js
-// @require      file://C:\Users\MaMonza\OGame\oHelper\oh_ChangeFleetTimers.js
-// @require      file://C:\Users\MaMonza\OGame\oHelper\oh_ChangeProductionCountdowns.js
+// @require      file://C:\OGame\oHelper\oh_Utils.js
+// @require      file://C:\OGame\oHelper\oh_ChangeFleetTimers.js
+// @require      file://C:\OGame\oHelper\oh_ChangeProductionCountdowns.js
 
 // @grant        none
 // ==/UserScript==
