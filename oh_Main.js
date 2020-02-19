@@ -7,7 +7,6 @@
 // @include      http://*/game/index.php?page=*
 // @include      https://*/game/index.php?page=*
 
-// @require      https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js
 // @match        *://*/*
 // @require      file://C:\OGame\oHelper\oh_Utils.js
 // @require      file://C:\OGame\oHelper\oh_ChangeFleetTimers.js
