@@ -477,6 +477,34 @@ div.localClock {
         mainObserver.observe(targetNodeToObserve, mainObserverConfig);
     }
 
+    function set_eventBoxObserver() {
+        // Options for the observer (which mutations to observe)
+        const eventBoxObserverConfig = { attributes: true, childList: false, subtree: false  };
+        const targetNodeToObserve = document.getElementById('eventboxContent');
+
+        // Callback function to execute when mutations are observed
+        const eventBoxObserverCallback = function(mutationsList, observer) {
+          //console.log('mutationsList : ' + mutationsList.length);
+          Array.from(mutationsList).forEach((oMutation) => {
+            //console.log('mutation type : ' + oMutation.type);
+            if ( oMutation.type == 'attributes' ) {
+              //console.log('The ' + oMutation.attributeName + ' attribute was modified.')
+              if ( oh_timeDiff_h != 0 ) {
+                let eventBoxStyle = targetNodeToObserve.getAttribute('style');
+                if ( ! isNullOrEmpty(eventBoxStyle) && eventBoxStyle != 'display: none;' ) {
+                  //console.log('changeEventBoxTimers');
+                  changeEventBoxTimers();
+                }
+              }
+            }
+          });
+        };
+        // Initializing mainObserver
+        eventBoxObserver = new MutationObserver(eventBoxObserverCallback)
+        // Start observing the target node for configured mutations
+        eventBoxObserver.observe(targetNodeToObserve, eventBoxObserverConfig);
+    }
+
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
 
@@ -490,8 +518,11 @@ div.localClock {
         oh_timeDiff_h = localTime.getHours() - serverTime.getHours();
         if ( oh_timeDiff_h != 0 ) { add_LocalClock(); }
 
-        // Setting up Main Observer to
+        // Setting up Main Observer
         set_MainObserver();
+
+        // Setting up EventBox Observer
+        set_eventBoxObserver();
 
         // Kill Tooltips shown over Planets and Moons links
         killPlanetsMoon_Tooltip();

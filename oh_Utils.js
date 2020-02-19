@@ -3,6 +3,7 @@ const oh_dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
 const oh_timeOptions = { hours : '2-digit', minutes : '2-digit', seconds : '2-digit' };
 const oh_dateTimeOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hours : '2-digit', minutes : '2-digit', seconds : '2-digit' };
 let mainObserver;
+let eventBoxObserver;
 
 let lang;
 let dateFormatString;
@@ -65,7 +66,6 @@ function get_UniverseLanguage() {
     });
     if ( lang != '' ) { dateFormatString = `${lang}-${lang.toUpperCase()}`; }
   }
-
 }
 
 // ******************************* End of Functions for document.location managing *******************************
@@ -129,6 +129,55 @@ function get_FormattedDate(oDate) {
 
 function get_FormattedTime(oDate) {
     return oDate.toLocaleTimeString(dateFormatString, oh_timeOptions);
+}
+
+function get_DateTimeAfterCountdown(countdownTimer) {
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
+  let index = 0;
+  const cTimerParts = countdownTimer.split(' ');
+  if ( isNullOrEmpty(cTimerParts) ) { return ''; }
+  // Scanning every parts of Countdown timer
+  Array.from(cTimerParts).forEach((el) => {
+    // Getting Type of timer Part
+    let timePart = el.substr(el.length - 1);
+    switch (timePart) {
+      // Weeks of production
+      case 'w':
+        hours = hours + ( parseInt(el.replace('w','')) * 7 ) * 24;
+      break;
+      case 's':
+        // In Italian could be WEEKS or SECONDS, take a look on [Index] of the current el :
+        // if = 0 --> WEEKS | if = cTimerParts.length --> SECONDS
+        if ( index == 0 ) {
+            hours = hours + ( parseInt(el.replace('s','')) * 7 ) * 24;
+        } else {
+            seconds = seconds + parseInt(el.replace('s',''));
+        }
+      break;
+      // Days of production
+      case 'd': days = days + parseInt(el.replace('d','')); break;
+      case 'g': days = days + parseInt(el.replace('g','')); break;
+      // Hours of production
+      case 'h': hours = hours + parseInt(el.replace('h','')); break;
+      case 'o': hours = hours + parseInt(el.replace('o','')); break;
+      // Minutes of production
+      case 'm': minutes = minutes + parseInt(el.replace('m','')); break;
+
+      default: break;
+
+    }
+    index = index + 1;
+  });
+
+  // Building Production Finisch DateTime starting from now
+  let dateTimeAfterCountdown = new Date();
+  dateTimeAfterCountdown.setHours(dateTimeAfterCountdown.getHours() + hours);
+  dateTimeAfterCountdown.setMinutes(dateTimeAfterCountdown.getMinutes() + minutes);
+  dateTimeAfterCountdown.setSeconds(dateTimeAfterCountdown.getSeconds() + seconds);
+
+  return dateTimeAfterCountdown;
 }
 
 
