@@ -9,7 +9,7 @@ function get_TitleAttributeFromDOM(oTag) {
 function get_DateFromDOM_Stirng(sDOM) {
     // Gets the Date in IT Format printed inside the DOM ( dd.MM.yyyy hh:mm:ss )
     // and converts it to the Standard ISO Format ( yyyy-MM-dd HH:mm:ss ) to create a Date Object
-    console.log(' DOM String : ' + sDOM);
+    console.log(' DOM String : [' + sDOM + ']');
     if ( sDOM != '' ) {
       // Sanitize the DOM String
       if ( sDOM.indexOf('<br>') > 0 ) { sDOM = sDOM.replace('<br>', ' '); }
