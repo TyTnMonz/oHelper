@@ -477,24 +477,20 @@ div.localClock {
         mainObserver.observe(targetNodeToObserve, mainObserverConfig);
     }
 
+    let eventBoxEvents = 0;
     function set_eventBoxObserver() {
         // Options for the observer (which mutations to observe)
-        const eventBoxObserverConfig = { attributes: true, childList: false, subtree: false  };
+        const eventBoxObserverConfig = { attributes: false, childList: true  };
         const targetNodeToObserve = document.getElementById('eventboxContent');
 
         // Callback function to execute when mutations are observed
         const eventBoxObserverCallback = function(mutationsList, observer) {
-          //console.log('mutationsList : ' + mutationsList.length);
           Array.from(mutationsList).forEach((oMutation) => {
-            //console.log('mutation type : ' + oMutation.type);
-            if ( oMutation.type == 'attributes' ) {
-              //console.log('The ' + oMutation.attributeName + ' attribute was modified.')
-              if ( oh_timeDiff_h != 0 ) {
-                let eventBoxStyle = targetNodeToObserve.getAttribute('style');
-                if ( ! isNullOrEmpty(eventBoxStyle) && eventBoxStyle != 'display: none;' ) {
-                  //console.log('changeEventBoxTimers');
-                  changeEventBoxTimers();
-                }
+            if ( oMutation.type == 'childList' && targetNodeToObserve.childNodes.length == 5 ) {
+              eventBoxEvents = eventBoxEvents + 1;
+              if ( oh_timeDiff_h != 0 && eventBoxEvents == 2 ) {
+                changeEventBoxTimers();
+                eventBoxEvents = 0;
               }
             }
           });

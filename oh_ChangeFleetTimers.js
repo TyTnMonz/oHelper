@@ -149,7 +149,7 @@ function changeEventBoxTimers() {
   let fleetEventCountdown;
   let fleetEventArrivalDateTime;
   Array.from(eventFleetList).forEach((el) => {
-    fleetEventCountdown = el.getElementsByClassName('friendly textBeefy');
+    fleetEventCountdown = el.getElementsByClassName('textBeefy');
     if ( isOne(fleetEventCountdown) ) { fleetEventCountdown = fleetEventCountdown[0].innerHTML; }
     const fleetEventArrivalDateTime = get_DateTimeAfterCountdown(fleetEventCountdown);
     fleetEvent = el.getElementsByClassName('arrivalTime');
