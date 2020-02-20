@@ -1,5 +1,8 @@
 function set_InproveBuildingInfos(mainDiv) {
     console.log('set_InproveBuildingInfos.....');
+
+
+
     // Chaging styles to reduce space
     let build_duration = mainDiv.getElementsByClassName('build_duration');
     if ( isOne(build_duration) ) { build_duration[0].setAttribute('style', 'margin-bottom: 5px !important;') }
