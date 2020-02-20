@@ -161,3 +161,65 @@ function changeEventBoxTimers() {
 }
 
 //***************************** End of Function to change Arrival DateTime of the [eventboxContent] ***************************
+
+//***************************** Function to change Arrival DateTime of the [fleet Dispatch Page] ***************************
+
+function get_DispatchDate(hours, minutes, seconds) {
+  let dateTime = new Date();
+  if ( parseInt(hours) > 0 ) { dateTime.setHours(dateTime.getHours() + parseInt(hours)); }
+  if ( parseInt(minutes) > 0 ) { dateTime.setMinutes(dateTime.getMinutes() + parseInt(minutes)); }
+  if ( parseInt(seconds) > 0 ) { dateTime.setSeconds(dateTime.getSeconds() + parseInt(seconds)); }
+  return dateTime;
+}
+
+function changeFleetDispatchDateTime() {
+  // Getting page Element to understand where we are
+  const fleetDispatch_Page2 = document.getElementById('fleet2');
+  if ( isNullOrEmpty(fleetDispatch_Page2) ) { return; }
+  const fleetDispatch_Page3 = document.getElementById('fleet3');
+  if ( isNullOrEmpty(fleetDispatch_Page3) ) { return; }
+  // Looking the state of Page2
+  const fleetDispatch_Page2_Style = fleetDispatch_Page2.getAttribute('style');
+  const fleetDispatch_Page3_Style = fleetDispatch_Page3.getAttribute('style');
+  if ( fleetDispatch_Page2_Style != 'display: none;' || fleetDispatch_Page3_Style != 'display: none;') {
+    // Fleet Dispatch Page 2 or 3 is shown
+
+    // Getting arrivalTime and returnTime DOM Object
+    // IDs could already be changed by this script...so searching with both options
+    let arrivalTime = document.getElementById('arrivalTime');
+    let returnTime = document.getElementById('returnTime');
+    if ( isNullOrEmpty(arrivalTime) || isNullOrEmpty(returnTime) ) {
+      console.log('non ho trovato ID originali...');
+      arrivalTime = document.getElementById('oh_arrivalTime');
+      returnTime = document.getElementById('oh_returnTime');
+      if ( isNullOrEmpty(arrivalTime) || isNullOrEmpty(returnTime) ) { return; }
+      console.log('ho trovato ID modificati...');
+    } else {
+      // Changing DOM Object IDs to stop the OGame Automatic Update Event
+      arrivalTime.id = 'oh_arrivalTime';
+      returnTime.id = 'oh_returnTime';
+    }
+
+    // Getting Fligth Duration Time
+    let flyghtDuration = document.getElementById('duration');
+    if ( isNullOrEmpty(flyghtDuration) ) { return; }
+    flyghtDuration = flyghtDuration.innerHTML.replace(' h', '').split(':');
+    if ( ! isNullOrEmpty(flyghtDuration) && flyghtDuration.length == 3 ) {
+      // Calculating Arrival DateTime and Retun DateTime
+      let arrivalDateTime = get_DispatchDate(flyghtDuration[0], flyghtDuration[1], flyghtDuration[2]);
+      let returnDateTime = get_DispatchDate(flyghtDuration[0] * 2, flyghtDuration[1] * 2, flyghtDuration[2] * 2);
+      // Changing Timers
+      console.log('cambio timers');
+      console.log('arrivalTime.innerHTML : ' + arrivalTime.innerHTML);
+      arrivalTime.setAttribute('orignal', arrivalTime.innerHTML);
+      arrivalTime.innerHTML = get_FormattedDateTimeNoYear(arrivalDateTime);
+      console.log('returnTime.innerHTML : ' + returnTime.innerHTML);
+      returnTime.setAttribute('orignal', returnTime.innerHTML);
+      returnTime.innerHTML = get_FormattedDateTimeNoYear(returnDateTime);
+
+    }
+  }
+}
+
+
+//***************************** End of Function to change Arrival DateTime of the [fleet Dispatch Page] ***************************

@@ -13,6 +13,7 @@ let dateFormatString;
 let localClock;
 let oh_timeDiff_h;
 let onFleetMovementsPage = false;
+let onFleetDispatchPage = false;
 
 // ******************************* Functions for Object managing *******************************
 

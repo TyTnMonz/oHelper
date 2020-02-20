@@ -468,8 +468,11 @@ div.localClock {
 
         // Callback function to execute when mutations are observed
         const mainObserverCallback = function(mutationsList, observer) {
-            if ( oh_timeDiff_h != 0 ) { localClock.innerHTML = get_FormattedDateTime(get_Local_DateTime_From_DOM_String(targetNodeToObserve.innerHTML)); }
-            if ( onFleetMovementsPage == true ) { changeFleetMovementsTimers(false); }
+            if ( oh_timeDiff_h != 0 ) {
+                localClock.innerHTML = get_FormattedDateTime(get_Local_DateTime_From_DOM_String(targetNodeToObserve.innerHTML));
+                if ( onFleetMovementsPage == true ) { changeFleetMovementsTimers(false); }
+                if ( onFleetDispatchPage == true ) { changeFleetDispatchDateTime(); }
+            }
         };
         // Initializing mainObserver
         mainObserver = new MutationObserver(mainObserverCallback)
@@ -528,6 +531,7 @@ div.localClock {
 
         // Looking @ Current Page
         onFleetMovementsPage = false;
+        onFleetDispatchPage = false;
         let currentPage = getUrlParam('page', 'empty');
         switch(currentPage) {
             case 'empty': break;
@@ -561,6 +565,7 @@ div.localClock {
                     case 'defenses':
                         break;
                     case 'fleetdispatch':
+                        onFleetDispatchPage = true;
                         break;
                     case 'galaxy':
                         break;
@@ -592,7 +597,4 @@ div.localClock {
                 break;
         }
     }
-
-
-
 })();
