@@ -11,6 +11,7 @@
 // @require      file://C:\OGame\oHelper\oh_Utils.js
 // @require      file://C:\OGame\oHelper\oh_ChangeFleetTimers.js
 // @require      file://C:\OGame\oHelper\oh_ChangeProductionCountdowns.js
+// @require      file://C:\OGame\oHelper\oh_ProductionInfos.js
 
 // @grant        none
 // ==/UserScript==
@@ -475,7 +476,7 @@ div.localClock {
             }
         };
         // Initializing mainObserver
-        mainObserver = new MutationObserver(mainObserverCallback)
+        mainObserver = new MutationObserver(mainObserverCallback);
         // Start observing the target node for configured mutations
         mainObserver.observe(targetNodeToObserve, mainObserverConfig);
     }
@@ -499,9 +500,60 @@ div.localClock {
           });
         };
         // Initializing mainObserver
-        eventBoxObserver = new MutationObserver(eventBoxObserverCallback)
+        eventBoxObserver = new MutationObserver(eventBoxObserverCallback);
         // Start observing the target node for configured mutations
         eventBoxObserver.observe(targetNodeToObserve, eventBoxObserverConfig);
+    }
+
+    function set_technologydetailsObserver() {
+        // Options for the observer (which mutations to observe)
+        const technologydetailsObserverConfig = { attributes: true, childList: false  };
+        const targetNodeToObserve = document.getElementById('technologydetails_wrapper');
+
+        // Callback function to execute when mutations are observed
+        const technologydetailsObserverCallback = function(mutationsList, observer) {
+          console.log('technologydetails_wrapper : ' + targetNodeToObserve.getAttribute('class'));
+          if ( targetNodeToObserve.getAttribute('class') == 'slide-up' ) {
+            console.log('technologydetails_wrapper slide-up...aspetto technologydetails');
+            waitForElement("#technologydetails").then(function(element) {
+                set_InproveBuildingInfos(element);
+            });
+          } else {
+            console.log('technologydetails_wrapper NON slide-up');
+            let childList = targetNodeToObserve.childNodes;
+            Array.from(childList).forEach((element) => {
+              console.log('rimuovo child...');
+              targetNodeToObserve.removeChild(element);
+            });
+          }
+
+        };
+        // Initializing mainObserver
+        technologydetailsObserver = new MutationObserver(technologydetailsObserverCallback);
+        // Start observing the target node for configured mutations
+        technologydetailsObserver.observe(targetNodeToObserve, technologydetailsObserverConfig);
+    }
+
+
+   function elementReady(selector) {
+     console.log('elementReady.....');
+      return new Promise((resolve, reject) => {
+        let el = document.querySelector(selector);
+        if (el) {resolve(el);}
+        new MutationObserver((mutationRecords, observer) => {
+          // Query for elements matching the specified selector
+          Array.from(document.querySelectorAll(selector)).forEach((element) => {
+            resolve(element);
+            //Once we have resolved we don't need the observer anymore.
+            //observer.disconnect();
+            //set_InproveBuildingInfos();
+          });
+        })
+          .observe(document.documentElement, {
+            childList: true,
+            subtree: true
+          });
+      });
     }
 
     //Script runs only with ogame pages
@@ -559,12 +611,15 @@ div.localClock {
                     case 'alliance':
                         break;
                     case 'research':
+                        set_technologydetailsObserver();
+                        //elementReady(document.getElementById('technologydetails_wrapper'));
                         break;
                     case 'shipyard':
                         break;
                     case 'defenses':
                         break;
                     case 'fleetdispatch':
+                        // Enabling Fleet Dispatch Timers changes
                         onFleetDispatchPage = true;
                         break;
                     case 'galaxy':
@@ -597,4 +652,5 @@ div.localClock {
                 break;
         }
     }
+
 })();

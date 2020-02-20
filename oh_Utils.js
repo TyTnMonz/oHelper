@@ -7,6 +7,7 @@ const oh_dateTimeShortNoYearOptions = { month: '2-digit', day: '2-digit', hours 
 
 let mainObserver;
 let eventBoxObserver;
+let technologydetailsObserver;
 
 let lang;
 let dateFormatString;
@@ -39,6 +40,33 @@ function get_AttributeFromDOM(oTag, oAttribute) {
           if ( ! isNullOrEmpty(attributeValue) ) { return attributeValue; }
     }
     return '';
+}
+
+
+function waitForElement(selector) {
+  return new Promise(function(resolve, reject) {
+    var element = document.querySelector(selector);
+
+    if(element) {
+      resolve(element);
+      return;
+    }
+
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        var nodes = Array.from(mutation.addedNodes);
+        for(var node of nodes) {
+          if(node.matches && node.matches(selector)) {
+            observer.disconnect();
+            resolve(node);
+            return;
+          }
+        };
+      });
+    });
+
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  });
 }
 
 // ******************************* End Functions for getting Attribute from Dome Object *******************************

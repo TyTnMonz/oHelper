@@ -173,6 +173,7 @@ function get_DispatchDate(hours, minutes, seconds) {
 }
 
 function changeFleetDispatchDateTime() {
+  console.log('changeFleetDispatchDateTime');
   // Getting page Element to understand where we are
   const fleetDispatch_Page2 = document.getElementById('fleet2');
   if ( isNullOrEmpty(fleetDispatch_Page2) ) { return; }
@@ -182,44 +183,50 @@ function changeFleetDispatchDateTime() {
   const fleetDispatch_Page2_Style = fleetDispatch_Page2.getAttribute('style');
   const fleetDispatch_Page3_Style = fleetDispatch_Page3.getAttribute('style');
   if ( fleetDispatch_Page2_Style != 'display: none;' || fleetDispatch_Page3_Style != 'display: none;') {
-    // Fleet Dispatch Page 2 or 3 is shown
-
-    // Getting arrivalTime and returnTime DOM Object
-    // IDs could already be changed by this script...so searching with both options
-    let arrivalTime = document.getElementById('arrivalTime');
-    let returnTime = document.getElementById('returnTime');
-    if ( isNullOrEmpty(arrivalTime) || isNullOrEmpty(returnTime) ) {
-      console.log('non ho trovato ID originali...');
-      arrivalTime = document.getElementById('oh_arrivalTime');
-      returnTime = document.getElementById('oh_returnTime');
-      if ( isNullOrEmpty(arrivalTime) || isNullOrEmpty(returnTime) ) { return; }
-      console.log('ho trovato ID modificati...');
-    } else {
-      // Changing DOM Object IDs to stop the OGame Automatic Update Event
-      arrivalTime.id = 'oh_arrivalTime';
-      returnTime.id = 'oh_returnTime';
-    }
-
-    // Getting Fligth Duration Time
+    // Fleet Dispatch Page 2 or 3 is shown...which one?
+    let tagList;
+    // Flight duration...shared between the 2 pages but the one inside Page 2 is dinamic
     let flyghtDuration = document.getElementById('duration');
-    if ( isNullOrEmpty(flyghtDuration) ) { return; }
-    flyghtDuration = flyghtDuration.innerHTML.replace(' h', '').split(':');
+    if ( ! isNullOrEmpty(flyghtDuration) ) { flyghtDuration = flyghtDuration.innerHTML.replace(' h', '').split(':'); }
     if ( ! isNullOrEmpty(flyghtDuration) && flyghtDuration.length == 3 ) {
-      // Calculating Arrival DateTime and Retun DateTime
-      let arrivalDateTime = get_DispatchDate(flyghtDuration[0], flyghtDuration[1], flyghtDuration[2]);
-      let returnDateTime = get_DispatchDate(flyghtDuration[0] * 2, flyghtDuration[1] * 2, flyghtDuration[2] * 2);
-      // Changing Timers
-      console.log('cambio timers');
-      console.log('arrivalTime.innerHTML : ' + arrivalTime.innerHTML);
-      arrivalTime.setAttribute('orignal', arrivalTime.innerHTML);
-      arrivalTime.innerHTML = get_FormattedDateTimeNoYear(arrivalDateTime);
-      console.log('returnTime.innerHTML : ' + returnTime.innerHTML);
-      returnTime.setAttribute('orignal', returnTime.innerHTML);
-      returnTime.innerHTML = get_FormattedDateTimeNoYear(returnDateTime);
-
+      // Calculating arrivalDateTime and returnDateTime
+      let arrivalDateTime = get_FormattedDateTimeNoYear(get_DispatchDate(flyghtDuration[0], flyghtDuration[1], flyghtDuration[2]));
+      let returnDateTime = get_FormattedDateTimeNoYear(get_DispatchDate(flyghtDuration[0] * 2, flyghtDuration[1] * 2, flyghtDuration[2] * 2));
+      // Looking at which page we are in
+      if ( fleetDispatch_Page2_Style != 'display: none;' ) {
+          // We are in Fleet Dispatch Page 2 - Getting his List of [ Briefing Tag ] with class = 'value'
+          tagList = fleetDispatch_Page2.getElementsByClassName('value');
+      }
+      if ( fleetDispatch_Page3_Style != 'display: none;' ) {
+          // We are in Fleet Dispatch Page 3 - Getting his List of [ Briefing Tag ] with class = 'value'
+          tagList = fleetDispatch_Page3.getElementsByClassName('value');
+      }
+      if ( ! isNullOrEmpty(tagList) ) {
+        // Iterating on each Briefing Tag looking at their child to find what we need to change :
+        // arrivalTime and returnTime span tag
+        let childList;
+        Array.from(tagList).forEach((el) => {
+            childList = el.childNodes;
+            if ( isNullOrEmpty(childList) ) { return; }
+            Array.from(childList).forEach((child) => {
+              // Iterating on children list
+              if ( child.id == 'arrivalTime' || child.id == 'oh_arrivalTime' ) {
+                // change ID to stop Ogame Original Auto Update
+                child.id = 'oh_arrivalTime';
+                // Overwriting the innerHTML whit formatted datetime
+                child.innerHTML = arrivalDateTime;
+              }
+              if ( child.id == 'returnTime' || child.id == 'oh_returnTime' ) {
+                // change ID to stop Ogame Original Auto Update
+                child.id = 'oh_returnTime';
+                // Overwriting the innerHTML whit formatted datetime
+                child.innerHTML = returnDateTime;
+              }
+            });
+        });
+      }
     }
   }
 }
-
 
 //***************************** End of Function to change Arrival DateTime of the [fleet Dispatch Page] ***************************
