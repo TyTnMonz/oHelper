@@ -29,7 +29,7 @@ function set_productionBox(sBox) {
             boxTableNewCell.setAttribute("colspan", "2");
             // Pasting DateTime inside the new Cell
             boxTableNewCell.innerHTML = "<span class='oh_Countdown_desc'>Ends:</span><br />";
-            boxTableNewCell.innerHTML += "<span class='oh_Countdown_time'>" + get_FormattedDateTime(productionFinishDateTime) + "</span>";
+            boxTableNewCell.innerHTML += "<span class='oh_Countdown_time'>" + get_FormattedDateTimeNoYear(productionFinishDateTime) + "</span>";
         }
       }
     }

@@ -70,7 +70,7 @@ function set_callBackTime(el, oDate) {
     // Adding Time to nextMission TAG
     let callBackTimer = el.getElementsByClassName('nextMission');
     if ( isOne(callBackTimer) ) {
-      callBackTimer[0].innerHTML = 'Return ' + get_FormattedTime(oDate);
+      callBackTimer[0].innerHTML = 'Return<br />' + get_FormattedDateTimeNoYear(oDate);
     }
   }
 }

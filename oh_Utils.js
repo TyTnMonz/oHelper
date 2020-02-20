@@ -2,6 +2,9 @@
 const oh_dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
 const oh_timeOptions = { hours : '2-digit', minutes : '2-digit', seconds : '2-digit' };
 const oh_dateTimeOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hours : '2-digit', minutes : '2-digit', seconds : '2-digit' };
+const oh_dateTimeShortOptions = { year: '2-digit', month: '2-digit', day: '2-digit', hours : '2-digit', minutes : '2-digit', seconds : '2-digit' };
+const oh_dateTimeShortNoYearOptions = { month: '2-digit', day: '2-digit', hours : '2-digit', minutes : '2-digit', seconds : '2-digit' };
+
 let mainObserver;
 let eventBoxObserver;
 
@@ -129,6 +132,14 @@ function get_FormattedDate(oDate) {
 
 function get_FormattedTime(oDate) {
     return oDate.toLocaleTimeString(dateFormatString, oh_timeOptions);
+}
+
+function get_FormattedDateTimeShort(oDate) {
+    return oDate.toLocaleTimeString(dateFormatString, oh_dateTimeShortOptions).replace(', ', ' ');
+}
+
+function get_FormattedDateTimeNoYear(oDate) {
+    return oDate.toLocaleTimeString(dateFormatString, oh_dateTimeShortNoYearOptions).replace(', ', ' ');
 }
 
 function get_DateTimeAfterCountdown(countdownTimer) {
