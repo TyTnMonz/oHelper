@@ -4,7 +4,7 @@ class clsFleetMov {
       this._id = id;
     }
 
-    // Origin Coords 
+    // Origin Coords
     get start_coords() { return this._start_coords; }
     set start_coords(x) { this._start_coords = x; }
 
@@ -41,6 +41,7 @@ class clsFleetMov {
 }
 //************************************************************************************************************
 
+//***************************** Functions to change DateTime inside INAHLT of Page [page=ingame&component=movement] ***************************
 
 function set_absTime(el, oDate) {
   if ( ! isNullOrEmpty(oDate) ) {
@@ -133,3 +134,30 @@ function changeFleetMovementsTimers(doEverythings = true) {
     }
   }
 }
+
+//***************************** End of Functions to change DateTime inside INAHLT of Page [page=ingame&component=movement] ***************************
+
+//***************************** Function to change Arrival DateTime of the [eventboxContent] ***************************
+
+function changeEventBoxTimers() {
+  const eventBox = document.getElementById('eventboxContent');
+  if ( isNullOrEmpty(eventBox) ) { return; }
+  const eventFleetList = eventBox.getElementsByClassName('eventFleet');
+  if ( isNullOrEmpty(eventFleetList) ) { return; }
+  // For Each Fleet Movement
+  let fleetEvent;
+  let fleetEventCountdown;
+  let fleetEventArrivalDateTime;
+  Array.from(eventFleetList).forEach((el) => {
+    fleetEventCountdown = el.getElementsByClassName('friendly textBeefy');
+    if ( isOne(fleetEventCountdown) ) { fleetEventCountdown = fleetEventCountdown[0].innerHTML; }
+    const fleetEventArrivalDateTime = get_DateTimeAfterCountdown(fleetEventCountdown);
+    fleetEvent = el.getElementsByClassName('arrivalTime');
+    if ( isOne(fleetEvent) ) {
+      fleetEvent[0].setAttribute('original', fleetEvent[0].innerHTML);
+      fleetEvent[0].innerHTML = get_FormattedTime(fleetEventArrivalDateTime);
+    }
+  });
+}
+
+//***************************** End of Function to change Arrival DateTime of the [eventboxContent] ***************************
