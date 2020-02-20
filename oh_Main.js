@@ -19,7 +19,7 @@
     'use strict';
 
     // ******************************* Function to kill the ToolTips *******************************
-    function killPlanetsMoon_Tooltip(){
+    function killPlanetsMoon_Tooltip() {
         // Get root element for Planets by ID
         let divPlanets = document.getElementById('planetList');
         // Get all PLANETS by Class
@@ -455,7 +455,7 @@ div.localClock {
   font-size: 11px;
 }
 
-`
+`;
 
         document.head.appendChild(css);
     }
