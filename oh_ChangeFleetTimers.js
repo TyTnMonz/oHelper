@@ -172,8 +172,18 @@ function get_DispatchDate(hours, minutes, seconds) {
   return dateTime;
 }
 
+function enableSpeedBar() {
+  if ( ! isNullOrEmpty(speedBar) ) { speedBar.setAttribute('style', ''); }
+}
+
+function disableSpeedBar() {
+  if ( ! isNullOrEmpty(speedBar) ) {
+    speedBar.setAttribute('style', 'pointer-events: none;');
+    setTimeout(enableSpeedBar, speedBarTimeOut * 1000);
+  }
+}
+
 function changeFleetDispatchDateTime() {
-  console.log('changeFleetDispatchDateTime');
   // Getting page Element to understand where we are
   const fleetDispatch_Page2 = document.getElementById('fleet2');
   if ( isNullOrEmpty(fleetDispatch_Page2) ) { return; }
@@ -196,6 +206,12 @@ function changeFleetDispatchDateTime() {
       if ( fleetDispatch_Page2_Style != 'display: none;' ) {
           // We are in Fleet Dispatch Page 2 - Getting his List of [ Briefing Tag ] with class = 'value'
           tagList = fleetDispatch_Page2.getElementsByClassName('value');
+          // Setting Event Listener over Speed Bar to disable it temorarly after click
+          speedBar = document.getElementById('speedPercentage');
+          if ( ! isNullOrEmpty(speedBar) ) {
+            speedBar.removeEventListener('click', disableSpeedBar);
+            speedBar.addEventListener('click', disableSpeedBar, false);
+          }
       }
       if ( fleetDispatch_Page3_Style != 'display: none;' ) {
           // We are in Fleet Dispatch Page 3 - Getting his List of [ Briefing Tag ] with class = 'value'
