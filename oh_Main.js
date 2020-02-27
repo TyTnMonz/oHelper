@@ -479,11 +479,11 @@ div.localClock {
         const mainObserverCallback = function(mutationsList, observer) {
             if ( oh_timeDiff_h != 0 ) {
                 localClock.innerHTML = get_FormattedDateTime(get_Local_DateTime_From_DOM_String(targetNodeToObserve.innerHTML));
-                if ( onFleetMovementsPage == true ) { changeFleetMovementsTimers(false); }
-                if ( onFleetDispatchPage == true ) { changeFleetDispatchDateTime(); }
-                // Verify if an Auto Refresh is needed
-                verifyLastRefresh();
-            }
+              }
+            if ( onFleetMovementsPage == true ) { changeFleetMovementsTimers(false); }
+            if ( onFleetDispatchPage == true ) { changeFleetDispatchDateTime(); }
+            // Verify if an Auto Refresh is needed
+            verifyLastRefresh();
         };
         // Initializing mainObserver
         mainObserver = new MutationObserver(mainObserverCallback);
