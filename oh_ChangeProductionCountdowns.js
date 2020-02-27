@@ -2,9 +2,11 @@
 
 
 function set_productionBox(sBox) {
-
+    // Main Box ID
     const boxID = `productionbox${sBox}component`;
-    const countdownID =  `${sBox}Countdown`;
+    // CountDown Value -> if Production Box for Ships then add '2' at the end
+    // because -shipyardCountdown- element represents single unit build countdown
+    const countdownID =  `${sBox}Countdown${( sBox == 'shipyard' ) ? '2':''}`;
     // Selecting Production Box for [sBox]
     const productionBox = document.getElementById(boxID);
     if ( isNullOrEmpty(productionBox) ) { return; }

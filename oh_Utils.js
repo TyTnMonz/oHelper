@@ -16,6 +16,25 @@ let oh_timeDiff_h;
 let onFleetMovementsPage = false;
 let onFleetDispatchPage = false;
 
+let lastRefresh;
+let nextCheck;
+
+// ******************************* Functions for Random *******************************
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //Il max è escluso e il min è incluso
+}
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //Il max è incluso e il min è incluso
+}
+
+// ******************************* End of Functions for Random *******************************
+
 // ******************************* Functions for Object managing *******************************
 
 function isNullOrEmpty(oObj) {

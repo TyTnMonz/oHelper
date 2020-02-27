@@ -12,6 +12,7 @@
 // @require      file://C:\OGame\oHelper\oh_ChangeFleetTimers.js
 // @require      file://C:\OGame\oHelper\oh_ChangeProductionCountdowns.js
 // @require      file://C:\OGame\oHelper\oh_ProductionInfos.js
+// @require      file://C:\OGame\oHelper\oh_IncomingAttacksAlert.js
 
 // @grant        none
 // ==/UserScript==
@@ -368,7 +369,13 @@
 
     // ******************************* Functions to Custom CSS Generation *******************************
     function create_CSS_Style(){
-
+        /*
+        let css = document.createElement('link');
+        css.setAttribute('type','text/css');
+        css.setAttribute('rel','stylesheet');
+        css.setAttribute('href','file://C:\OGame\oHelper\oh_style.css');
+        document.head.appendChild(css);
+        */
         let css = document.createElement('style');
         css.setAttribute('type','text/css');
         css.innerHTML = `
@@ -459,6 +466,7 @@ div.localClock {
 `;
 
         document.head.appendChild(css);
+
     }
     // ******************************* End of Functions to Custom CSS Generation *******************************
 
@@ -473,6 +481,8 @@ div.localClock {
                 localClock.innerHTML = get_FormattedDateTime(get_Local_DateTime_From_DOM_String(targetNodeToObserve.innerHTML));
                 if ( onFleetMovementsPage == true ) { changeFleetMovementsTimers(false); }
                 if ( onFleetDispatchPage == true ) { changeFleetDispatchDateTime(); }
+                // Verify if an Auto Refresh is needed
+                verifyLastRefresh();
             }
         };
         // Initializing mainObserver
@@ -559,6 +569,9 @@ div.localClock {
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
 
+        // Setting Last Refresh Page Time
+        lastRefresh = new Date();
+
         // Adding CSS Resources for Script Implementations
         create_CSS_Style();
 
@@ -580,6 +593,9 @@ div.localClock {
 
         // Refresh Cookies
         refreshCurPlanetCookie();
+
+        // Checking Any Incoming Attacks
+       checkIncomingAttack();
 
         // Looking @ Current Page
         onFleetMovementsPage = false;
