@@ -602,7 +602,7 @@ div.localClock {
         onFleetDispatchPage = false;
         let currentPage = getUrlParam('page', 'empty');
         switch(currentPage) {
-            case 'empty': break;
+            case 'empty': /* Failed to retrieve Page */ break;
             case 'ingame' :
                 // Looking @ Current Component
                 var currentComponent = getUrlParam('component', 'empty');
@@ -610,7 +610,7 @@ div.localClock {
                     case 'empty': /* Failed to retrieve Component */ break;
                     case 'overview':
                     case 'overview&relogin=1':
-                        //Overview page
+                        //Overview Page
                         // Adding Resources Table above Planet Details
                         showResources();
                         // Adding Timers to Production Boxes if active
@@ -627,11 +627,8 @@ div.localClock {
                         break;
                     case 'marketplace':
                         break;
-                    case 'traderoverview':
-                        break;
-                    case 'alliance':
-                        break;
                     case 'research':
+                        // Adding Timers to Production Boxes if active
                         set_productionBox('research');
                         break;
                     case 'shipyard':
@@ -651,8 +648,9 @@ div.localClock {
                     case 'movement':
                         //Movements page - adding bottom margin to the end of Fleet Movements list
                         document.getElementById('movement').setAttribute('style','margin-bottom: 50px;');
-                        changeFleetMovementsTimers();
+                        // Chang Timers for Fleet Movements
                         onFleetMovementsPage = true;
+                        changeFleetMovementsTimers(onFleetMovementsPage);
                         break;
                     default:
                         // none
