@@ -617,8 +617,13 @@ div.localClock {
                         set_ProductionBox_All();
                         break;
                     case 'supplies':
+                        // Adding Timers to Production Boxes if active
+                        set_productionBox('building');
+                        set_productionBox('shipyard');
                         break;
                     case 'facilities':
+                        // Adding Timers to Production Boxes if active
+                        set_productionBox('building');
                         break;
                     case 'marketplace':
                         break;
@@ -627,12 +632,15 @@ div.localClock {
                     case 'alliance':
                         break;
                     case 'research':
-                        set_technologydetailsObserver();
-                        //elementReady(document.getElementById('technologydetails_wrapper'));
+                        set_productionBox('research');
                         break;
                     case 'shipyard':
+                        // Adding Timers to Production Boxes if active
+                        set_productionBox('shipyard');
                         break;
                     case 'defenses':
+                        // Adding Timers to Production Boxes if active
+                        set_productionBox('shipyard');
                         break;
                     case 'fleetdispatch':
                         // Enabling Fleet Dispatch Timers changes
