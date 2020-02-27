@@ -5,6 +5,9 @@ const oh_dateTimeOptions = { year: 'numeric', month: '2-digit', day: '2-digit', 
 const oh_dateTimeShortOptions = { year: '2-digit', month: '2-digit', day: '2-digit', hours : '2-digit', minutes : '2-digit', seconds : '2-digit' };
 const oh_dateTimeShortNoYearOptions = { month: '2-digit', day: '2-digit', hours : '2-digit', minutes : '2-digit', seconds : '2-digit' };
 
+const speedBarTimeOut = 1;
+let speedBar;
+
 let mainObserver;
 let eventBoxObserver;
 let technologydetailsObserver;
@@ -15,7 +18,6 @@ let localClock;
 let oh_timeDiff_h;
 let onFleetMovementsPage = false;
 let onFleetDispatchPage = false;
-
 let lastRefresh;
 let nextCheck;
 
