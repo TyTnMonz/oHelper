@@ -218,8 +218,8 @@ function get_DateTimeAfterCountdown(countdownTimer) {
         }
       break;
       // Days of production
-      case 'd': days = days + parseInt(el.replace('d','')); break;
-      case 'g': days = days + parseInt(el.replace('g','')); break;
+      case 'd': hours = hours + parseInt(el.replace('d','')) * 24; break;
+      case 'g': hours = hours + parseInt(el.replace('g','')) * 24; break;
       // Hours of production
       case 'h': hours = hours + parseInt(el.replace('h','')); break;
       case 'o': hours = hours + parseInt(el.replace('o','')); break;
