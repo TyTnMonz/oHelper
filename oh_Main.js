@@ -642,6 +642,7 @@ div.localClock {
                     case 'fleetdispatch':
                         // Enabling Fleet Dispatch Timers changes
                         onFleetDispatchPage = true;
+                        manageFleet();
                         break;
                     case 'galaxy':
                         break;
