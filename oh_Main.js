@@ -463,6 +463,14 @@ div.localClock {
   font-size: 11px;
 }
 
+#rechts #myPlanets div.smallplanet a.moonlink .icon-moon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    left: 0;
+    top: 10px;
+}
+
 `;
 
         document.head.appendChild(css);
@@ -566,6 +574,14 @@ div.localClock {
       });
     }
 
+    function set_PlanetListStyle() {
+        const oPlanetList = document.getElementsByClassName('icon-moon');
+        Array.from(oPlanetList).forEach((element) => {
+          element.setAttribute('style', 'left: 0px !important; top: 0px !important; position: absolute;');
+        });
+
+    }
+
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
 
@@ -574,6 +590,8 @@ div.localClock {
 
         // Adding CSS Resources for Script Implementations
         create_CSS_Style();
+
+        set_PlanetListStyle();
 
         // Getting Universe Language
         get_UniverseLanguage();
