@@ -16,6 +16,7 @@
 // @require      file://C:\OGame\oHelper\oh_ChangeProductionCountdowns.js
 // @require      file://C:\OGame\oHelper\oh_ProductionInfos.js
 // @require      file://C:\OGame\oHelper\oh_IncomingAttacksAlert.js
+// @require      file://C:\OGame\oHelper\oh_Settings.js
 
 // @grant        none
 // ==/UserScript==
@@ -304,6 +305,8 @@ div.localClock {
 
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
+        // Adding the button in the left buttons list menu
+        addToLeftMenuButtons();
 
         // Setting Last Refresh Page Time
         lastRefresh = new Date();
