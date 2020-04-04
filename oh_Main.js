@@ -582,6 +582,34 @@ div.localClock {
 
     }
 
+    function addDebugControl() {
+        const rightPanel = document.getElementById('rechts');
+        if ( ! isNullOrEmpty(rightPanel) ) {
+          let dbgDiv = document.createElement('div');
+          let dbgCheckBox = document.createElement('input');
+          let dbgLabel = document.createElement('label');
+
+          dbgDiv.setAttribute('id', 'debugDiv');
+
+          dbgCheckBox.setAttribute('type', 'checkbox');
+          dbgCheckBox.setAttribute('id', 'debugChbx');
+          dbgCheckBox.setAttribute('name', 'debugChbx');
+          dbgCheckBox.addEventListener('click', setEnableDebugLog, false);
+          // Getting SessionStorage Value for Debugging Status
+          dbgCheckBox.checked = sessionStorage.getItem('debug') == 'true' ? true:false;
+
+          dbgLabel.setAttribute('for', 'debug');
+          dbgLabel.setAttribute('style', 'color: #9c0; font-size: 10px; position: relative; top: -3px; left: 5px;');
+          dbgLabel.addEventListener('click', setEnableDebugLog, false);
+          dbgLabel.innerHTML = 'Abilita Debug';
+
+          dbgDiv.appendChild(dbgCheckBox);
+          dbgDiv.appendChild(dbgLabel);
+
+          rightPanel.insertBefore(dbgDiv, document.getElementById('cutty'));
+        }
+    }
+
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
 
@@ -591,6 +619,10 @@ div.localClock {
         // Adding CSS Resources for Script Implementations
         create_CSS_Style();
 
+        // Adding CheckBox to Enable Debugging
+        addDebugControl();
+
+        // Setting Planet List Style
         set_PlanetListStyle();
 
         // Getting Universe Language
@@ -613,7 +645,7 @@ div.localClock {
         refreshCurPlanetCookie();
 
         // Checking Any Incoming Attacks
-       checkIncomingAttack();
+        checkIncomingAttack();
 
         // Looking @ Current Page
         onFleetMovementsPage = false;

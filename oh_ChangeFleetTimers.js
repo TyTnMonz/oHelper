@@ -4,6 +4,8 @@ class clsFleetMov {
       this._id = id;
     }
 
+    get fleet_id() { return this._id; }
+
     // Origin Coords
     get start_coords() { return this._start_coords; }
     set start_coords(x) { this._start_coords = x; }
@@ -79,6 +81,7 @@ function set_callBackTime(el, oDate) {
 function changeFleetMovementsTimers(doEverythings = true) {
   // Getting mainDiv for Fleet Movements
   let mainDiv = document.getElementById('inhalt');
+  getPrintDebugLog('sto cambiando i timer dei movimenti flotta');
   if ( ! isNullOrEmpty(mainDiv) ) {
     // Getting all the Fleet Movement lines
     let fleetDetails = mainDiv.getElementsByClassName('fleetDetails');
@@ -88,26 +91,33 @@ function changeFleetMovementsTimers(doEverythings = true) {
       // For Each Fleet Movement
       Array.from(fleetDetails).forEach((el) => {
         // Creating the Object to manage the single Fleet Movement
+        getPrintDebugLog(`Fleet ID : ${get_AttributeFromDOM(el, 'id')}`);
         fleetMov = new clsFleetMov(get_AttributeFromDOM(el, 'id'));
         // Settings all the Datas inside the Object
-        fleetMov.data_return = get_AttributeFromDOM(timerElement, 'data-return-flight');
+        getPrintDebugLog(`data-return-flight : ${el.getAttribute('data-return-flight')}`);
+        fleetMov.data_return = get_AttributeFromDOM(el, 'data-return-flight');
 
         if ( fleetMov.isOnWayBack == true ) {
 
           // Fleet is on his way back, only ont DateTime to grab
+          getPrintDebugLog(`Fleet ${fleetMov.fleet_id} is on his way back, only ont DateTime to grab`);
           timerElement = el.getElementsByClassName('origin fixed');
           if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
+          getPrintDebugLog(`origin fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
           fleetMov.arrival_datetime = get_AttributeFromDOM(timerElement, 'Title');
 
         } else {
 
           // Fleet is on his way out
+          getPrintDebugLog(`Fleet ${fleetMov.fleet_id} is on his way out`);
           timerElement = el.getElementsByClassName('origin fixed');
           if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
+          getPrintDebugLog(`origin fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
           fleetMov.starting_datetime = get_AttributeFromDOM(timerElement, 'Title');
 
           timerElement = el.getElementsByClassName('destination fixed');
           if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
+          getPrintDebugLog(`destination fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
           fleetMov.arrival_datetime = get_AttributeFromDOM(timerElement, 'Title');
 
           fleetMov.mission_end_datetime = get_AttributeFromDOM(el.getElementsByClassName('nextTimer tooltip'), 'Title');

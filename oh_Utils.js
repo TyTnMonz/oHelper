@@ -21,6 +21,24 @@ let onFleetDispatchPage = false;
 let lastRefresh;
 let nextCheck;
 
+
+// ******************************* Functions for Debugging *******************************
+
+function setEnableDebugLog() {
+    let dbgCheckBox = document.getElementById('debugChbx');
+    if ( ! isNullOrEmpty(dbgCheckBox) ) {
+      console.log('dbgCheckBox: ' + dbgCheckBox.checked);
+      sessionStorage.setItem('debug', dbgCheckBox.checked);
+      console.log('sessione registrata: ' + sessionStorage.getItem('debug'));
+    }
+}
+
+function getPrintDebugLog(sMessageLog) {
+  if ( sessionStorage.getItem('debug') == 'true' ) { console.log(sMessageLog); }
+}
+
+// ******************************* End of Functions for Debugging *******************************
+
 // ******************************* Functions for Random *******************************
 
 function getRandomInt(min, max) {
@@ -56,13 +74,15 @@ function isOne(oObj) {
 
 function get_AttributeFromDOM(oTag, oAttribute) {
     // Extracts the [oAttribute] Attribute from the [oTag] DOM Object
+    let attributeValue = '';
     if ( isOne(oTag) ) {
-          let attributeValue = oTag[0].getAttribute(oAttribute);
-          if ( ! isNullOrEmpty(attributeValue) ) { return attributeValue; }
+        attributeValue = oTag[0].getAttribute(oAttribute);
+    } else {
+        attributeValue = oTag.getAttribute(oAttribute);
     }
-    return '';
+    if ( ! isNullOrEmpty(attributeValue) ) { return attributeValue; }
+    return attributeValue;
 }
-
 
 function waitForElement(selector) {
   return new Promise(function(resolve, reject) {
