@@ -201,6 +201,19 @@ div.localClock {
   background-color: red;
 }
 
+#ohOverlayDialogClearCache:link, #ohOverlayDialogClearCache:visited {
+  background-color: #66CCFF;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#ohOverlayDialogClearCache:hover, #ohOverlayDialogClearCache:active {
+  background-color: #6699FF;
+}
+
 `;
 
         document.head.appendChild(css);
@@ -312,7 +325,7 @@ div.localClock {
 
     }
 
-    function addDebugControl() {
+    /*function addDebugControl() {
         const rightPanel = document.getElementById('rechts');
         if ( ! isNullOrEmpty(rightPanel) ) {
           let dbgDiv = document.createElement('div');
@@ -338,7 +351,7 @@ div.localClock {
 
           rightPanel.insertBefore(dbgDiv, document.getElementById('cutty'));
         }
-    }
+    }*/
 
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
@@ -352,7 +365,7 @@ div.localClock {
         create_CSS_Style();
 
         // Adding CheckBox to Enable Debugging
-        addDebugControl();
+        //addDebugControl();
 
         // Setting Planet List Style
         set_PlanetListStyle();

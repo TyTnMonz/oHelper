@@ -61,7 +61,54 @@ function buildOverlayDialog(ohOverlayDialog){
   cellLeft.setAttribute('width', '100% ');
   cellLeft.innerHTML = `
   <center><h1 style="font-size:20px;">oHelper - Impostazioni</h1></center>
-  `;;
+  <br><br>`;
+
+  let dbgCheckBox = document.createElement('input');
+  let dbgLabel = document.createElement('label');
+
+  dbgCheckBox.setAttribute('type', 'checkbox');
+  dbgCheckBox.setAttribute('id', 'debugChbx');
+  dbgCheckBox.setAttribute('name', 'debugChbx');
+  dbgCheckBox.addEventListener('click', setEnableDebugLog, false);
+  // Getting SessionStorage Value for Debugging Status
+  dbgCheckBox.checked = sessionStorage.getItem('debug') == 'true' ? true:false;
+
+  dbgLabel.setAttribute('for', 'debug');
+  dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
+  dbgLabel.addEventListener('click', setEnableDebugLog, false);
+  dbgLabel.innerHTML = 'Abilita Debug';
+  cellLeft.appendChild(dbgCheckBox);
+  cellLeft.appendChild(dbgLabel);
+
+  /*********************************************/
+  cellLeft.appendChild(document.createElement('p'));
+  /*********************************************/
+
+  dbgCheckBox = document.createElement('input');
+  dbgLabel = document.createElement('label');
+  dbgCheckBox.setAttribute('type', 'checkbox');
+  dbgCheckBox.setAttribute('id', 'ohIncomingAttacksAlert');
+  dbgCheckBox.setAttribute('name', 'ohIncomingAttacksAlert');
+  //dbgCheckBox.addEventListener('click', setEnableDebugLog, false);
+  // Getting SessionStorage Value for Debugging Status
+  dbgCheckBox.checked = sessionStorage.getItem('ohIncomingAttacksAlert') == 'true' ? true:false;
+
+  dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
+  dbgLabel.addEventListener('click', setEnableDebugLog, false);
+  dbgLabel.innerHTML = 'Abilita Alert degli attacchi';
+  cellLeft.appendChild(dbgCheckBox);
+  cellLeft.appendChild(dbgLabel);
+
+  /*********************************************/
+  cellLeft.appendChild(document.createElement('p'));
+  /*********************************************/
+
+  let oClearCache = document.createElement('a');
+  oClearCache.setAttribute('href', '#');
+  oClearCache.setAttribute('id', 'ohOverlayDialogClearCache');
+  oClearCache.innerHTML = 'Resetta dati cache';
+  //  oClearCache.addEventListener('click', closeSettingsDialog);
+  cellLeft.appendChild(oClearCache);
 
   ohOverlayDialog.appendChild(oMainTB);
 }
