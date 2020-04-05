@@ -1,3 +1,16 @@
+function setOption(pOption, pKey, pLocal) {
+    getPrintDebugLog(`Setting Option [${pOption}]`);
+    let oOption = document.getElementById(pOption);
+    if ( ! isNullOrEmpty(oOption) ) {
+      if ( pLocal == true ) {
+        localStorage.setItem(pKey, oOption.checked);
+      } else {
+        sessionStorage.setItem(pKey, oOption.checked);
+      }
+      getPrintDebugLog(`Key [${pKey}] for Option [${pOption}] set to ${ oLocal == true ? 'localStorage':'sessionStorage' } with value [${oOption.checked}]`);
+    }
+}
+
 function addToLeftMenuButtons(){
   let oLi = document.createElement('li');
   let oSpanL = document.createElement('span');
@@ -69,13 +82,13 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgCheckBox.setAttribute('type', 'checkbox');
   dbgCheckBox.setAttribute('id', 'debugChbx');
   dbgCheckBox.setAttribute('name', 'debugChbx');
-  dbgCheckBox.addEventListener('click', setEnableDebugLog, false);
+  dbgCheckBox.addEventListener('click', setOption('debugChbx', 'ohDebug', false), false);
   // Getting SessionStorage Value for Debugging Status
-  dbgCheckBox.checked = sessionStorage.getItem('debug') == 'true' ? true:false;
+  dbgCheckBox.checked = sessionStorage.getItem('ohDebug') == 'true' ? true:false;
 
-  dbgLabel.setAttribute('for', 'debug');
+  dbgLabel.setAttribute('for', 'debugChbx');
   dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
-  dbgLabel.addEventListener('click', setEnableDebugLog, false);
+  dbgLabel.addEventListener('click',  setOption('debugChbx', 'ohDebug', false), false);
   dbgLabel.innerHTML = 'Abilita Debug';
   cellLeft.appendChild(dbgCheckBox);
   cellLeft.appendChild(dbgLabel);
@@ -87,14 +100,15 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgCheckBox = document.createElement('input');
   dbgLabel = document.createElement('label');
   dbgCheckBox.setAttribute('type', 'checkbox');
-  dbgCheckBox.setAttribute('id', 'ohIncomingAttacksAlert');
-  dbgCheckBox.setAttribute('name', 'ohIncomingAttacksAlert');
-  //dbgCheckBox.addEventListener('click', setEnableDebugLog, false);
+  dbgCheckBox.setAttribute('id', 'ohIAAChbx');
+  dbgCheckBox.setAttribute('name', 'ohIAAChbx');
+  dbgCheckBox.addEventListener('click', setOption('ohIAAChbx', 'ohIncomingAttacksAlert', true), false);
   // Getting SessionStorage Value for Debugging Status
-  dbgCheckBox.checked = sessionStorage.getItem('ohIncomingAttacksAlert') == 'true' ? true:false;
+  dbgCheckBox.checked = localStorage.getItem('ohIncomingAttacksAlert') == 'true' ? true:false;
 
+  dbgLabel.setAttribute('for', 'ohIAAChbx');
   dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
-  dbgLabel.addEventListener('click', setEnableDebugLog, false);
+  dbgLabel.addEventListener('click', setOption('ohIAAChbx', 'ohIncomingAttacksAlert', true), false);
   dbgLabel.innerHTML = 'Abilita Alert degli attacchi';
   cellLeft.appendChild(dbgCheckBox);
   cellLeft.appendChild(dbgLabel);

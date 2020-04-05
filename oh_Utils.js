@@ -24,12 +24,23 @@ let nextCheck;
 
 // ******************************* Functions for Debugging *******************************
 
+
+
 function setEnableDebugLog() {
-    let dbgCheckBox = document.getElementById('debugChbx');
-    if ( ! isNullOrEmpty(dbgCheckBox) ) {
-      console.log('dbgCheckBox: ' + dbgCheckBox.checked);
-      sessionStorage.setItem('debug', dbgCheckBox.checked);
+    let oCheckBox = document.getElementById('debugChbx');
+    if ( ! isNullOrEmpty(oCheckBox) ) {
+      console.log('dbgCheckBox: ' + oCheckBox.checked);
+      sessionStorage.setItem('debug', oCheckBox.checked);
       console.log('sessione registrata: ' + sessionStorage.getItem('debug'));
+    }
+}
+
+function setEnableIncomingAttacksAlert() {
+    let oCheckBox = document.getElementById('ohIAAChbx');
+    if ( ! isNullOrEmpty(oCheckBox) ) {
+      console.log('dbgCheckBox: ' + oCheckBox.checked);
+      localStorage.setItem('ohIAAChbx', oCheckBox.checked);
+      console.log('sessione registrata: ' + localStorage.getItem('ohIAAChbx'));
     }
 }
 
