@@ -59,7 +59,9 @@ function buildOverlayDialog(ohOverlayDialog){
   cellRight.addEventListener('click', closeSettingsDialog);
 
   cellLeft.setAttribute('width', '100% ');
-  cellLeft.innerHTML = "ciao<br>ciao<br>ciao";
+  cellLeft.innerHTML = `
+  <center><h1 style="font-size:20px;">oHelper - Impostazioni</h1></center>
+  `;;
 
   ohOverlayDialog.appendChild(oMainTB);
 }

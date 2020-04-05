@@ -181,7 +181,7 @@ div.localClock {
   position: absolute;
   top: 50%;
   left: 50%;
-  font-size: 50px;
+  font-size: 14px;
   color: white;
   transform: translate(-50%,-50%);
   background-color: rgba(0,0,0,1);
