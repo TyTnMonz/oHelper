@@ -33,6 +33,7 @@ function _showDepotTimeRemaining(depotName){
   let available = _removeNumberPoints(oSpans[0].innerHTML);
   let capacity = _removeNumberPoints(oSpans[1].innerHTML);
   let production = _removeNumberPoints(oSpans[2].innerHTML);
+  let curPercentage = Math.floor((available/capacity)*100);
 
   if(production > 0){
     let remaining = (capacity-available)/production;
@@ -40,7 +41,15 @@ function _showDepotTimeRemaining(depotName){
     let minutes = Math.floor((remaining-hours)*60);
 
     oSpan = document.createElement('span');
-    oSpan.setAttribute('class', 'ohDepotTimeSpan');
+    if(curPercentage <=50){
+      oSpan.setAttribute('class', 'ohDepotTimeSpanGreen');
+    }
+    else if(curPercentage>50 && curPercentage<=85){
+      oSpan.setAttribute('class', 'ohDepotTimeSpanYellow');
+    }
+    else if(curPercentage>85){
+      oSpan.setAttribute('class', 'ohDepotTimeSpanRed');
+    }
     oSpan.innerHTML = hours + 'h ' + minutes + 'm';
 
     oBox.appendChild(oSpan);

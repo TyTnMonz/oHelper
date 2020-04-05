@@ -214,11 +214,25 @@ div.localClock {
   background-color: #6699FF;
 }
 
-.ohDepotTimeSpan{
+.ohDepotTimeSpanGreen{
 position: relative;
 top: 10px;
-color: #FF0000;
 font-size: 10px;
+color: #00cc00;
+}
+
+.ohDepotTimeSpanYellow{
+position: relative;
+top: 10px;
+font-size: 10px;
+color: #ffff00;
+}
+
+.ohDepotTimeSpanRed{
+position: relative;
+top: 10px;
+font-size: 10px;
+color: #ff0000;
 }
 
 `;
