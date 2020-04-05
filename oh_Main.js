@@ -392,6 +392,9 @@ div.localClock {
         // Checking Any Incoming Attacks
         checkIncomingAttack();
 
+        //Showing Depot time remainings before full
+        showDepotTimeRemaining();
+
         // Looking @ Current Page
         onFleetMovementsPage = false;
         onFleetDispatchPage = false;

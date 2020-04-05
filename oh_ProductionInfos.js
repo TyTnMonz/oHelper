@@ -16,3 +16,53 @@ function set_InproveBuildingInfos(mainDiv) {
     let costs = mainDiv.getElementsByClassName('costs');
     if ( isOne(costs) ) { costs[0].setAttribute('style', 'top: 90px !important;') }
 }
+
+/*************** Start showing depots time remaining before full ***************/
+function showDepotTimeRemaining(){
+  //_showMetalDepotTimeRemaining();
+  _showDepotTimeRemaining('metal_box');
+  _showDepotTimeRemaining('crystal_box');
+  _showDepotTimeRemaining('deuterium_box');
+}
+
+function _showDepotTimeRemaining(depotName){
+  let oBox = document.getElementById(depotName);
+  let oTable = htmlToElement(oBox.getAttribute('title').split('|')[1]);
+  let oSpans = oTable.getElementsByTagName('span');
+
+  let available = _removeNumberPoints(oSpans[0].innerHTML);
+  let capacity = _removeNumberPoints(oSpans[1].innerHTML);
+  let production = _removeNumberPoints(oSpans[2].innerHTML);
+
+  if(production > 0){
+    let remaining = (capacity-available)/production;
+    let hours = Math.floor(remaining);
+    let minutes = Math.floor((remaining-hours)*60);
+
+    oSpan = document.createElement('span');
+    oSpan.setAttribute('class', 'ohDepotTimeSpan');
+    oSpan.innerHTML = hours + 'h ' + minutes + 'm';
+
+    oBox.appendChild(oSpan);
+  }
+}
+/*function _showMetalDepotTimeRemaining(){
+  let oMetalBox = document.getElementById('metal_box');
+  let oTable = htmlToElement(oMetalBox.getAttribute('title').split('|')[1]);
+  let oSpans = oTable.getElementsByTagName('span');
+
+  let available = _removeNumberPoints(oSpans[0].innerHTML);
+  let capacity = _removeNumberPoints(oSpans[1].innerHTML);
+  let production = _removeNumberPoints(oSpans[2].innerHTML);
+
+  let remaining = (capacity-available)/production;
+  let hours = Math.floor(remaining);
+  let minutes = Math.floor((remaining-hours)*60);
+
+  oSpan = document.createElement('span');
+  oSpan.setAttribute('class', 'ohDepotTimeSpan');
+  oSpan.innerHTML = hours + 'h ' + minutes + 'm';
+
+  oMetalBox.appendChild(oSpan);
+}*/
+/*************** End showing depots time remaining before full ***************/
