@@ -7,7 +7,7 @@ function setOption(pOption, pKey, pLocal) {
       } else {
         sessionStorage.setItem(pKey, oOption.checked);
       }
-      getPrintDebugLog(`Key [${pKey}] for Option [${pOption}] set to ${ oLocal == true ? 'localStorage':'sessionStorage' } with value [${oOption.checked}]`);
+      getPrintDebugLog(`Key [${pKey}] for Option [${pOption}] set to ${ pLocal == true ? 'localStorage':'sessionStorage' } with value [${oOption.checked}]`);
     }
 }
 
@@ -82,13 +82,13 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgCheckBox.setAttribute('type', 'checkbox');
   dbgCheckBox.setAttribute('id', 'debugChbx');
   dbgCheckBox.setAttribute('name', 'debugChbx');
-  dbgCheckBox.addEventListener('click', setOption('debugChbx', 'ohDebug', false), false);
+  dbgCheckBox.addEventListener('click', function(){ setOption('debugChbx', 'ohDebug', false); }, false);
   // Getting SessionStorage Value for Debugging Status
   dbgCheckBox.checked = sessionStorage.getItem('ohDebug') == 'true' ? true:false;
 
   dbgLabel.setAttribute('for', 'debugChbx');
   dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
-  dbgLabel.addEventListener('click',  setOption('debugChbx', 'ohDebug', false), false);
+  dbgLabel.addEventListener('click', function(){ setOption('debugChbx', 'ohDebug', false); }, false);
   dbgLabel.innerHTML = 'Abilita Debug';
   cellLeft.appendChild(dbgCheckBox);
   cellLeft.appendChild(dbgLabel);
@@ -102,13 +102,13 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgCheckBox.setAttribute('type', 'checkbox');
   dbgCheckBox.setAttribute('id', 'ohIAAChbx');
   dbgCheckBox.setAttribute('name', 'ohIAAChbx');
-  dbgCheckBox.addEventListener('click', setOption('ohIAAChbx', 'ohIncomingAttacksAlert', true), false);
+  dbgCheckBox.addEventListener('click', function(){ setOption('ohIAAChbx', 'ohIncomingAttacksAlert', true); }, false);
   // Getting SessionStorage Value for Debugging Status
   dbgCheckBox.checked = localStorage.getItem('ohIncomingAttacksAlert') == 'true' ? true:false;
 
   dbgLabel.setAttribute('for', 'ohIAAChbx');
   dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
-  dbgLabel.addEventListener('click', setOption('ohIAAChbx', 'ohIncomingAttacksAlert', true), false);
+  dbgLabel.addEventListener('click', function(){ setOption('ohIAAChbx', 'ohIncomingAttacksAlert', true); }, false);
   dbgLabel.innerHTML = 'Abilita Alert degli attacchi';
   cellLeft.appendChild(dbgCheckBox);
   cellLeft.appendChild(dbgLabel);

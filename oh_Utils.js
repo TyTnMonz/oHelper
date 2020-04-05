@@ -24,28 +24,8 @@ let nextCheck;
 
 // ******************************* Functions for Debugging *******************************
 
-
-
-function setEnableDebugLog() {
-    let oCheckBox = document.getElementById('debugChbx');
-    if ( ! isNullOrEmpty(oCheckBox) ) {
-      console.log('dbgCheckBox: ' + oCheckBox.checked);
-      sessionStorage.setItem('debug', oCheckBox.checked);
-      console.log('sessione registrata: ' + sessionStorage.getItem('debug'));
-    }
-}
-
-function setEnableIncomingAttacksAlert() {
-    let oCheckBox = document.getElementById('ohIAAChbx');
-    if ( ! isNullOrEmpty(oCheckBox) ) {
-      console.log('dbgCheckBox: ' + oCheckBox.checked);
-      localStorage.setItem('ohIAAChbx', oCheckBox.checked);
-      console.log('sessione registrata: ' + localStorage.getItem('ohIAAChbx'));
-    }
-}
-
 function getPrintDebugLog(sMessageLog) {
-  if ( sessionStorage.getItem('debug') == 'true' ) { console.log(sMessageLog); }
+  if ( sessionStorage.getItem('ohDebug') == 'true' ) { console.log(sMessageLog); }
 }
 
 // ******************************* End of Functions for Debugging *******************************
