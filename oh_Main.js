@@ -35,20 +35,28 @@
         // Get all PLANETS by Class
         let sPlanets = divPlanets.getElementsByClassName('smallplanet');
         // For Each Planets in aPlanets sets the with of content to 110px
-        Array.from(sPlanets).forEach((el) => { el.style.width = '110px' });
+        //Array.from(sPlanets).forEach((el) => { el.style.width = '110px' });
+        Array.from(sPlanets).forEach((el) => { el.style.width = '110px'; el.style.height = '45px';});
         // Get all MOONS by Class
         let aMoons = divPlanets.getElementsByClassName('moonlink');
         // For Each Moons in aMoons sets the Attribute Title to '' and move them to the right of the Planets
         Array.from(aMoons).forEach((el) => {
             el.setAttribute('title', '');
-            el.style = 'left: 110px; top: 10px; position: absolute;';
+            el.style = 'left: 110px; top: 5px; position: absolute;';
         });
         // Get all MOON Icons by Class
         let icnMoons = divPlanets.getElementsByClassName('icon-moon');
         // For Each Moons in icnMoons sets the Attribute width & height to 18 to make them bigger
         Array.from(icnMoons).forEach((el) => {
-            el.style.width = '18px';
-            el.style.height = '18px';
+            el.style.width = '20px';
+            el.style.height = '20px';
+        });
+        // Get all PLANET Icons by Class
+        let icnPlanets = divPlanets.getElementsByClassName('planetPic');
+        // For Each Moons in icnMoons sets the Attribute width & height to 18 to make them bigger
+        Array.from(icnPlanets).forEach((el) => {
+            el.style.width = '26px';
+            el.style.height = '26px';
         });
     }
     // ******************************* End of Function to kill the ToolTips *******************************
