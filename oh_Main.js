@@ -8,10 +8,10 @@
 // @include      https://*/game/index.php?page=*
 
 // @match        *://*/*
+// @require      file://C:\OGame\oHelper\oh_Utils.js
 // @require      file://C:\OGame\oHelper\oh_Cookies.js
 // @require      file://C:\OGame\oHelper\oh_FlyingResources.js
 // @require      file://C:\OGame\oHelper\oh_ManageFleet.js
-// @require      file://C:\OGame\oHelper\oh_Utils.js
 // @require      file://C:\OGame\oHelper\oh_ChangeFleetTimers.js
 // @require      file://C:\OGame\oHelper\oh_ChangeProductionCountdowns.js
 // @require      file://C:\OGame\oHelper\oh_ProductionInfos.js
@@ -469,6 +469,7 @@ color: #ff0000;
                     case 'fleetdispatch':
                         // Enabling Fleet Dispatch Timers changes
                         onFleetDispatchPage = true;
+                        replaceContinueToFleet2Button();
                         manageFleet();
                         break;
                     case 'galaxy':

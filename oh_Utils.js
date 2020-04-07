@@ -20,6 +20,7 @@ let onFleetMovementsPage = false;
 let onFleetDispatchPage = false;
 let lastRefresh;
 let nextCheck;
+let ContinueToFleet2Clicks = 0;
 
 
 // ******************************* Functions for Debugging *******************************
