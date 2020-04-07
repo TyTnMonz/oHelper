@@ -55,7 +55,7 @@ function _changeShipsStyle(ulName){
 }
 
 function changeFleet1ShipsStyle(){
-  return;
+  //return;
   document.getElementById('military').style.width ='420px';
   document.getElementById('military').style.height ='227px';
   document.getElementById('battleships').style.width ='420px';
