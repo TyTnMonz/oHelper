@@ -1,6 +1,7 @@
 function clicResetallFleet(){
   ContinueToFleet2Clicks = 0;
   document.getElementById('oh_ContinueToFleet2').setAttribute('class', 'continue off');
+  document.getElementById('oh_ContinueToFleet2').focus();
 }
 
 function clicNewContinueToFleet2Btn(evt){
@@ -34,6 +35,36 @@ function replaceContinueToFleet2Button(){
   oResetAll.addEventListener('click', clicResetallFleet);
 }
 
+function _changeShipsStyle(ulName){
+  let ul = document.getElementById(ulName);
+  Array.from(ul.childNodes).forEach((el) => {
+    if(el.nodeName.toUpperCase() == "LI"){
+      el.style.width = '78px';
+      el.style.height = '81px';
+
+      el.childNodes[1].style.display = 'inline-block';
+      el.childNodes[1].style.width = '78px';
+      el.childNodes[1].style.height = '81px';
+    }
+  });
+}
+
+function changeFleet1ShipsStyle(){
+  return;
+  document.getElementById('military').style.width ='420px';
+  document.getElementById('military').style.height ='255px';
+  document.getElementById('battleships').style.width ='420px';
+  document.getElementById('battleships').style.height ='255px';
+
+  document.getElementById('civil').style.width ='250px';
+  document.getElementById('civil').style.height ='255px';
+  document.getElementById('civilships').style.width ='250px';
+  document.getElementById('civilships').style.height ='255px';
+
+  _changeShipsStyle('military');
+  _changeShipsStyle('civil');
+}
+
 function manageFleet(){
   var target1 = document.getElementById('continueToFleet2');
   var target2 = document.getElementById('fleet2');
@@ -45,6 +76,7 @@ function manageFleet(){
         if(metaOPT != ''){
           var oNewBtn = document.getElementById('oh_ContinueToFleet2');
           oNewBtn.setAttribute('class', target1.getAttribute('class'));
+          oNewBtn.focus();
         }
         //observer0.disconnect();
       });
