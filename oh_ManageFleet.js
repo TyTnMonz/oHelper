@@ -39,12 +39,17 @@ function _changeShipsStyle(ulName){
   let ul = document.getElementById(ulName);
   Array.from(ul.childNodes).forEach((el) => {
     if(el.nodeName.toUpperCase() == "LI"){
-      el.style.width = '78px';
+      el.style.width = '73px';
       el.style.height = '81px';
 
+      //SPAN
       el.childNodes[1].style.display = 'inline-block';
-      el.childNodes[1].style.width = '78px';
-      el.childNodes[1].style.height = '81px';
+      el.childNodes[1].style.width = '73px';
+      el.childNodes[1].style.height = '75px';
+
+      //Input
+      el.childNodes[3].style.width = '71.75px';
+      el.childNodes[3].style.height = '21px';
     }
   });
 }
@@ -52,14 +57,15 @@ function _changeShipsStyle(ulName){
 function changeFleet1ShipsStyle(){
   return;
   document.getElementById('military').style.width ='420px';
-  document.getElementById('military').style.height ='255px';
+  document.getElementById('military').style.height ='227px';
   document.getElementById('battleships').style.width ='420px';
   document.getElementById('battleships').style.height ='255px';
 
   document.getElementById('civil').style.width ='250px';
-  document.getElementById('civil').style.height ='255px';
+  document.getElementById('civil').style.height ='227px';
   document.getElementById('civilships').style.width ='250px';
   document.getElementById('civilships').style.height ='255px';
+  document.getElementById('civilships').style.paddingLeft ='0px';
 
   _changeShipsStyle('military');
   _changeShipsStyle('civil');
