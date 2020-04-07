@@ -28,6 +28,7 @@ function replaceContinueToFleet2Button(){
   let oMainButton = document.getElementById('continueToFleet2');
   oMainButton.parentNode.insertBefore(oNewBtn, oMainButton);
   oMainButton.style.display='none';
+  oNewBtn.focus();
 
   let oResetAll = document.getElementById('resetall');
   oResetAll.addEventListener('click', clicResetallFleet);
