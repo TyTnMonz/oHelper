@@ -23,7 +23,6 @@
 // ==/UserScript==
 
 (function() {
-<<<<<<< HEAD
     'use strict';
 
     //*** MAIN ***
@@ -48,46 +47,6 @@
         mainObserver.observe(targetNodeToObserve, mainObserverConfig);
     }
 
-    let eventBoxEvents = 0;
-    function set_eventBoxObserver() {
-        // Options for the observer (which mutations to observe)
-        const eventBoxObserverConfig = { attributes: false, childList: true  };
-        const targetNodeToObserve = document.getElementById('eventboxContent');
-
-        // Callback function to execute when mutations are observed
-        const eventBoxObserverCallback = function(mutationsList, observer) {
-          Array.from(mutationsList).forEach((oMutation) => {
-            if ( oMutation.type == 'childList' && targetNodeToObserve.childNodes.length == 5 ) {
-              eventBoxEvents = eventBoxEvents + 1;
-              if ( oh_timeDiff_h != 0 && eventBoxEvents == 2 ) {
-                changeEventBoxTimers();
-                eventBoxEvents = 0;
-              }
-=======
-  'use strict';
-
-  //*** MAIN ***
-  function set_MainObserver() {
-      // Options for the observer (which mutations to observe)
-      const mainObserverConfig = { attributes: true, childList: true, subtree: true };
-      const targetNodeToObserve = document.getElementsByClassName('OGameClock')[0];
-
-      // Callback function to execute when mutations are observed
-      const mainObserverCallback = function(mutationsList, observer) {
-          if ( oh_timeDiff_h != 0 ) {
-              localClock.innerHTML = get_FormattedDateTime(get_Local_DateTime_From_DOM_String(targetNodeToObserve.innerHTML));
-            }
-          if ( onFleetMovementsPage == true ) { changeFleetMovementsTimers(false); }
-          if ( onFleetDispatchPage == true ) { changeFleetDispatchDateTime(); }
-          // Verify if an Auto Refresh is needed
-          verifyLastRefresh();
-      };
-      // Initializing mainObserver
-      mainObserver = new MutationObserver(mainObserverCallback);
-      // Start observing the target node for configured mutations
-      mainObserver.observe(targetNodeToObserve, mainObserverConfig);
-  }
-
   let eventBoxEvents = 0;
   function set_eventBoxObserver() {
       // Options for the observer (which mutations to observe)
@@ -102,7 +61,6 @@
             if ( oh_timeDiff_h != 0 && eventBoxEvents == 2 ) {
               changeEventBoxTimers();
               eventBoxEvents = 0;
->>>>>>> b4003e698ef45ee461970cac83b8b4a3483fd4ae
             }
           }
         });
