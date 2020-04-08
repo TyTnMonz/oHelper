@@ -1,16 +1,20 @@
 const oh_saveSettingLocation = { local: 'l', session: 's' };
 
 function get_OptionValue(pKey, pLocal = oh_saveSettingLocation.local) {
-  //console.log(`Getting pKey [${pKey}]`);
+  pKey = `${universe}.${pKey}`;
+  console.log(`Getting Option Key [${pKey}]`);
   if ( pLocal == oh_saveSettingLocation.local ) {
+    console.log(`Key Value [${localStorage.getItem(pKey)}]`);
     return localStorage.getItem(pKey);
   } else {
+    console.log(`Key Value [${sessionStorage.getItem(pKey)}]`);
     return sessionStorage.getItem(pKey);
   }
 }
 
 function set_OptionValue(pOption, pKey, pLocal = oh_saveSettingLocation.local) {
-    getPrintDebugLog(`Setting Option [${pOption}]`);
+    pKey = `${universe}.${pKey}`;
+    console.log(`Setting Option [${pOption}] with Key [${pKey}]`);
     let oOption = document.getElementById(pOption);
     if ( ! isNullOrEmpty(oOption) ) {
       if ( pLocal == oh_saveSettingLocation.local ) {
@@ -18,7 +22,7 @@ function set_OptionValue(pOption, pKey, pLocal = oh_saveSettingLocation.local) {
       } else {
         sessionStorage.setItem(pKey, oOption.checked);
       }
-      getPrintDebugLog(`Key [${pKey}] for Option [${pOption}] set to ${ pLocal == oh_saveSettingLocation.local ? 'localStorage':'sessionStorage' } with value [${oOption.checked}]`);
+      console.log(`Key [${pKey}] for Option [${pOption}] set to ${ pLocal == oh_saveSettingLocation.local ? 'localStorage':'sessionStorage' } with value [${oOption.checked}]`);
     }
 }
 
@@ -93,13 +97,13 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgCheckBox.setAttribute('type', 'checkbox');
   dbgCheckBox.setAttribute('id', 'debugChbx');
   dbgCheckBox.setAttribute('name', 'debugChbx');
-  dbgCheckBox.addEventListener('click', function(){ set_OptionValue('debugChbx', 'ohDebug'); }, false);
+  dbgCheckBox.addEventListener('click', function(){ set_OptionValue('debugChbx', 'ohDebug', oh_saveSettingLocation.session); }, false);
   // Getting SessionStorage Value for Debugging Status
-  dbgCheckBox.checked = get_OptionValue('ohDebug') == 'true' ? true:false;
+  dbgCheckBox.checked = get_OptionValue('ohDebug', oh_saveSettingLocation.session) == 'true' ? true:false;
 
   dbgLabel.setAttribute('for', 'debugChbx');
   dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
-  dbgLabel.addEventListener('click', function(){ set_OptionValue('debugChbx', 'ohDebug'); }, false);
+  dbgLabel.addEventListener('click', function(){ set_OptionValue('debugChbx', 'ohDebug', oh_saveSettingLocation.session); }, false);
   dbgLabel.innerHTML = 'Abilita Debug';
   cellLeft.appendChild(dbgCheckBox);
   cellLeft.appendChild(dbgLabel);
@@ -113,13 +117,13 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgCheckBox.setAttribute('type', 'checkbox');
   dbgCheckBox.setAttribute('id', 'ohIAAChbx');
   dbgCheckBox.setAttribute('name', 'ohIAAChbx');
-  dbgCheckBox.addEventListener('click', function(){ set_OptionValue('ohIAAChbx', 'ohIncomingAttacksAlert', oh_saveSettingLocation.session); }, false);
+  dbgCheckBox.addEventListener('click', function(){ set_OptionValue('ohIAAChbx', 'ohIncomingAttacksAlert'); }, false);
   // Getting SessionStorage Value for Debugging Status
-  dbgCheckBox.checked = get_OptionValue('ohIncomingAttacksAlert', oh_saveSettingLocation.session) == 'true' ? true:false;
+  dbgCheckBox.checked = get_OptionValue('ohIncomingAttacksAlert') == 'true' ? true:false;
 
   dbgLabel.setAttribute('for', 'ohIAAChbx');
   dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
-  dbgLabel.addEventListener('click', function(){ set_OptionValue('ohIAAChbx', 'ohIncomingAttacksAlert', oh_saveSettingLocation.session); }, false);
+  dbgLabel.addEventListener('click', function(){ set_OptionValue('ohIAAChbx', 'ohIncomingAttacksAlert'); }, false);
   dbgLabel.innerHTML = 'Abilita Alert degli attacchi';
   cellLeft.appendChild(dbgCheckBox);
   cellLeft.appendChild(dbgLabel);

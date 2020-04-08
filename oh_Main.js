@@ -39,7 +39,7 @@
             if ( onFleetMovementsPage == true ) { changeFleetMovementsTimers(false); }
             if ( onFleetDispatchPage == true ) { changeFleetDispatchDateTime(); }
             // Verify if an Auto Refresh is needed
-            verifyLastRefresh();
+            if ( stopCheckRefresh == false ) { verifyLastRefresh(); }
         };
         // Initializing mainObserver
         mainObserver = new MutationObserver(mainObserverCallback);
@@ -132,20 +132,21 @@
 
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
-      // Adding CSS Resources for Script Implementations
-      create_CSS_Style();
+        // Adding CSS Resources for Script Implementations
+        create_CSS_Style();
+
+        // Getting Universe Language
+        get_UniverseInfos();
 
         // Adding the button in the left buttons list menu
         addToLeftMenuButtons();
 
         // Setting Last Refresh Page Time
         lastRefresh = new Date();
+        stopCheckRefresh = false;
 
         // Setting Planet List Style
         set_PlanetListStyle();
-
-        // Getting Universe Language
-        get_UniverseLanguage();
 
         // Setting Additional Clock on Current Local Time if needed
         oh_timeDiff_h = localTime.getHours() - serverTime.getHours();

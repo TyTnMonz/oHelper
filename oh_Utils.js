@@ -13,6 +13,7 @@ let eventBoxObserver;
 let technologydetailsObserver;
 
 let lang;
+let universe;
 let dateFormatString;
 let localClock;
 let oh_timeDiff_h;
@@ -20,13 +21,14 @@ let onFleetMovementsPage = false;
 let onFleetDispatchPage = false;
 let lastRefresh;
 let nextCheck;
+let stopCheckRefresh = false;
 let ContinueToFleet2Clicks = 0;
 
 
 // ******************************* Functions for Debugging *******************************
 
 function getPrintDebugLog(sMessageLog) {
-  if ( get_OptionValue('ohDebug') == 'true' ) { console.log(sMessageLog); }
+  if ( get_OptionValue('ohDebug', oh_saveSettingLocation.session) == 'true' ) { console.log(sMessageLog); }
 }
 
 // ******************************* End of Functions for Debugging *******************************
@@ -123,11 +125,12 @@ function getUrlParam(parameter, defaultvalue) {
 }
 
 // Gets the Universe Language
-function get_UniverseLanguage() {
+function get_UniverseInfos() {
   const metas = document.getElementsByTagName('meta');
   if ( ! isNullOrEmpty(metas) ) {
     Array.from(metas).forEach((el) => {
       if ( el.getAttribute('name') === 'ogame-language' ) { lang = el.getAttribute('content'); }
+      if ( el.getAttribute('name') === 'ogame-universe' ) { universe = el.getAttribute('content').split('.')[0]; }
     });
     if ( lang != '' ) { dateFormatString = `${lang}-${lang.toUpperCase()}`; }
   }

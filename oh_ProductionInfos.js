@@ -50,7 +50,7 @@ function _showDepotTimeRemaining(depotName){
     else if(curPercentage>85){
       oSpan.setAttribute('class', 'ohDepotTimeSpanRed');
     }
-    oSpan.innerHTML = hours + 'h ' + minutes + 'm';
+    oSpan.innerHTML = curPercentage + '%';// hours + 'h ' + minutes + 'm';
 
     oBox.appendChild(oSpan);
   }
