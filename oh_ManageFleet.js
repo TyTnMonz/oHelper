@@ -18,7 +18,6 @@ function clicNewContinueToFleet2Btn(evt){
 }
 
 function replaceContinueToFleet2Button(){
-  //return;
   let oNewBtn = document.createElement('a');
   oNewBtn.setAttribute('id', 'oh_ContinueToFleet2');
   oNewBtn.setAttribute('class', 'continue off');
