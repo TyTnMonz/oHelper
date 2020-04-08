@@ -46,6 +46,7 @@ function _changeShipsStyle(ulName){
       el.childNodes[1].style.display = 'inline-block';
       el.childNodes[1].style.width = '73px';
       el.childNodes[1].style.height = '75px';
+      el.childNodes[1].setAttribute('onclick', 'javascript:document.getElementById(\'oh_ContinueToFleet2\').focus();');
 
       //Input
       el.childNodes[3].style.width = '71.75px';
@@ -82,7 +83,7 @@ function manageFleet(){
         if(metaOPT != ''){
           var oNewBtn = document.getElementById('oh_ContinueToFleet2');
           oNewBtn.setAttribute('class', target1.getAttribute('class'));
-          oNewBtn.focus();
+          //oNewBtn.focus();
         }
         //observer0.disconnect();
       });
