@@ -1,7 +1,7 @@
 const oh_saveSettingLocation = { local: 'l', session: 's' };
 
 function get_OptionValue(pKey, pLocal = oh_saveSettingLocation.local) {
-  getPrintDebugLog(`Getting pKey [${pKey}]`);
+  //console.log(`Getting pKey [${pKey}]`);
   if ( pLocal == oh_saveSettingLocation.local ) {
     return localStorage.getItem(pKey);
   } else {

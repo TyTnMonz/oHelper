@@ -26,7 +26,7 @@ let ContinueToFleet2Clicks = 0;
 // ******************************* Functions for Debugging *******************************
 
 function getPrintDebugLog(sMessageLog) {
-  if ( sessionStorage.getItem('ohDebug') == 'true' ) { console.log(sMessageLog); }
+  if ( get_OptionValue('ohDebug') == 'true' ) { console.log(sMessageLog); }
 }
 
 // ******************************* End of Functions for Debugging *******************************
