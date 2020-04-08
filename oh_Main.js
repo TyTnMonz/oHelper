@@ -470,6 +470,7 @@ color: #ff0000;
                         // Enabling Fleet Dispatch Timers changes
                         onFleetDispatchPage = true;
                         replaceContinueToFleet2Button();
+                        changeFleet1ShipsStyle();
                         manageFleet();
                         break;
                     case 'galaxy':
