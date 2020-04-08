@@ -38,13 +38,13 @@ function _changeShipsStyle(ulName){
   let ul = document.getElementById(ulName);
   Array.from(ul.childNodes).forEach((el) => {
     if(el.nodeName.toUpperCase() == "LI"){
-      el.style.width = '73px';
+      el.style.width = '78px';
       el.style.height = '81px';
 
       //SPAN
       el.childNodes[1].style.display = 'inline-block';
-      el.childNodes[1].style.width = '73px';
-      el.childNodes[1].style.height = '75px';
+      el.childNodes[1].style.width = '78px';
+      el.childNodes[1].style.height = '78px';
       el.childNodes[1].setAttribute('onclick', 'javascript:document.getElementById(\'oh_ContinueToFleet2\').focus();');
 
       //Input
@@ -60,12 +60,17 @@ function changeFleet1ShipsStyle(){
   document.getElementById('military').style.height ='227px';
   document.getElementById('battleships').style.width ='420px';
   document.getElementById('battleships').style.height ='255px';
+  document.getElementById('battleships').style.marginLeft ='-10px';
 
-  document.getElementById('civil').style.width ='250px';
+  document.getElementById('civil').style.width ='270px';
   document.getElementById('civil').style.height ='227px';
-  document.getElementById('civilships').style.width ='250px';
+  document.getElementById('civil').style.marginLeft ='0px';
+  document.getElementById('civil').style.marginRight ='20px';
+  document.getElementById('civilships').style.width ='270px';
   document.getElementById('civilships').style.height ='255px';
   document.getElementById('civilships').style.paddingLeft ='0px';
+  document.getElementById('civilships').style.marginLeft ='0px';
+  document.getElementById('civilships').style.marginRight ='20px';
 
   _changeShipsStyle('military');
   _changeShipsStyle('civil');

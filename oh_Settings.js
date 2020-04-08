@@ -102,7 +102,7 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgCheckBox.checked = get_OptionValue('ohDebug', oh_saveSettingLocation.session) == 'true' ? true:false;
 
   dbgLabel.setAttribute('for', 'debugChbx');
-  dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
+  dbgLabel.setAttribute('style', 'color: #9c0; font-size: 18px; position: relative; top: -3px; left: 5px;');
   dbgLabel.addEventListener('click', function(){ set_OptionValue('debugChbx', 'ohDebug', oh_saveSettingLocation.session); }, false);
   dbgLabel.innerHTML = 'Abilita Debug';
   cellLeft.appendChild(dbgCheckBox);
@@ -122,7 +122,7 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgCheckBox.checked = get_OptionValue('ohIncomingAttacksAlert') == 'true' ? true:false;
 
   dbgLabel.setAttribute('for', 'ohIAAChbx');
-  dbgLabel.setAttribute('style', 'color: #9c0; font-size: 20px; position: relative; top: -3px; left: 5px;');
+  dbgLabel.setAttribute('style', 'color: #9c0; font-size: 18px; position: relative; top: -3px; left: 5px;');
   dbgLabel.addEventListener('click', function(){ set_OptionValue('ohIAAChbx', 'ohIncomingAttacksAlert'); }, false);
   dbgLabel.innerHTML = 'Abilita Alert degli attacchi';
   cellLeft.appendChild(dbgCheckBox);
@@ -130,6 +130,28 @@ function buildOverlayDialog(ohOverlayDialog){
 
   /*********************************************/
   cellLeft.appendChild(document.createElement('p'));
+  /*********************************************/
+
+  dbgCheckBox = document.createElement('input');
+  dbgLabel = document.createElement('label');
+  dbgCheckBox.setAttribute('type', 'checkbox');
+  dbgCheckBox.setAttribute('id', 'ohShowDepotTimeChbx');
+  dbgCheckBox.setAttribute('name', 'ohShowDepotTimeChbx');
+  dbgCheckBox.addEventListener('click', function(){ set_OptionValue('ohShowDepotTimeChbx', 'ohShowDepotTimeChbx'); }, false);
+  // Getting SessionStorage Value for Debugging Status
+  dbgCheckBox.checked = get_OptionValue('ohShowDepotTimeChbx') == 'true' ? true:false;
+
+  dbgLabel.setAttribute('for', 'ohShowDepotTimeChbx');
+  dbgLabel.setAttribute('style', 'color: #9c0; font-size: 18px; position: relative; top: -3px; left: 5px;');
+  dbgLabel.innerHTML = 'Mostra % riempimento depositi invece del tempo rimanente';
+  cellLeft.appendChild(dbgCheckBox);
+  cellLeft.appendChild(dbgLabel);
+
+  /*********************************************/
+  let p = document.createElement('p');
+  p.innerHTML = "<br><br>";
+  //cellLeft.appendChild(document.createElement('p'));
+  cellLeft.appendChild(p);
   /*********************************************/
 
   let oClearCache = document.createElement('a');

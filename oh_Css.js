@@ -115,7 +115,7 @@ function create_CSS_Style(){
   color: white;
   transform: translate(-50%,-50%);
   background-color: rgba(0,0,0,1);
-  width: 600px;
+  width: 650px;
   }
 
   #ohOverlayDialogClose:link, #ohOverlayDialogClose:visited {

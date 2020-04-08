@@ -300,17 +300,6 @@ function _removeNumberPoints(str){
 
     return ret;
 }
-
-/*function _replaceAllOccurrence(str, occ){
-  let strings = str.split(occ);
-  console.log(strings);
-  let ret = "";
-  for(i=0; i<strings.length; i++){
-    ret += strings[i];
-  }
-
-  return ret;
-}*/
 // ******************************* End of Functions for working on numbers *******************************
 
 

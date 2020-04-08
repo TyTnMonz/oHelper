@@ -1,8 +1,6 @@
 function set_InproveBuildingInfos(mainDiv) {
     console.log('set_InproveBuildingInfos.....');
 
-
-
     // Chaging styles to reduce space
     let build_duration = mainDiv.getElementsByClassName('build_duration');
     if ( isOne(build_duration) ) { build_duration[0].setAttribute('style', 'margin-bottom: 5px !important;') }
@@ -19,7 +17,6 @@ function set_InproveBuildingInfos(mainDiv) {
 
 /*************** Start showing depots time remaining before full ***************/
 function showDepotTimeRemaining(){
-  //_showMetalDepotTimeRemaining();
   _showDepotTimeRemaining('metal_box');
   _showDepotTimeRemaining('crystal_box');
   _showDepotTimeRemaining('deuterium_box');
@@ -50,28 +47,15 @@ function _showDepotTimeRemaining(depotName){
     else if(curPercentage>85){
       oSpan.setAttribute('class', 'ohDepotTimeSpanRed');
     }
-    oSpan.innerHTML = curPercentage + '%';// hours + 'h ' + minutes + 'm';
+
+    let showPercentage = get_OptionValue('ohShowDepotTimeChbx');
+    console.log("AAA -" + showPercentage);
+    if(showPercentage == 'true')
+      oSpan.innerHTML = curPercentage + '%';// hours + 'h ' + minutes + 'm';
+    else
+      oSpan.innerHTML = hours + 'h ' + minutes + 'm';
 
     oBox.appendChild(oSpan);
   }
 }
-/*function _showMetalDepotTimeRemaining(){
-  let oMetalBox = document.getElementById('metal_box');
-  let oTable = htmlToElement(oMetalBox.getAttribute('title').split('|')[1]);
-  let oSpans = oTable.getElementsByTagName('span');
-
-  let available = _removeNumberPoints(oSpans[0].innerHTML);
-  let capacity = _removeNumberPoints(oSpans[1].innerHTML);
-  let production = _removeNumberPoints(oSpans[2].innerHTML);
-
-  let remaining = (capacity-available)/production;
-  let hours = Math.floor(remaining);
-  let minutes = Math.floor((remaining-hours)*60);
-
-  oSpan = document.createElement('span');
-  oSpan.setAttribute('class', 'ohDepotTimeSpan');
-  oSpan.innerHTML = hours + 'h ' + minutes + 'm';
-
-  oMetalBox.appendChild(oSpan);
-}*/
 /*************** End showing depots time remaining before full ***************/
