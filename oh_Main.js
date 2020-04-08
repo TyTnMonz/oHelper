@@ -9,6 +9,7 @@
 
 // @match        *://*/*
 // @require      file://C:\OGame\oHelper\oh_Utils.js
+// @require      file://C:\OGame\oHelper\oh_Css.js
 // @require      file://C:\OGame\oHelper\oh_Cookies.js
 // @require      file://C:\OGame\oHelper\oh_FlyingResources.js
 // @require      file://C:\OGame\oHelper\oh_ManageFleet.js
@@ -24,232 +25,7 @@
 (function() {
     'use strict';
 
-    // ******************************* Function to kill the ToolTips *******************************
-    function killPlanetsMoon_Tooltip() {
-        // Get root element for Planets by ID
-        let divPlanets = document.getElementById('planetList');
-        // Get all PLANETS by Class
-        let aPlanets = divPlanets.getElementsByClassName('planetlink');
-        // For Each Planets in aPlanets sets the Attribute Title to ''
-        Array.from(aPlanets).forEach((el) => el.setAttribute('title', ''));
-        // Get all PLANETS by Class
-        let sPlanets = divPlanets.getElementsByClassName('smallplanet');
-        // For Each Planets in aPlanets sets the with of content to 110px
-        //Array.from(sPlanets).forEach((el) => { el.style.width = '110px' });
-        Array.from(sPlanets).forEach((el) => { el.style.width = '110px'; el.style.height = '45px';});
-        // Get all MOONS by Class
-        let aMoons = divPlanets.getElementsByClassName('moonlink');
-        // For Each Moons in aMoons sets the Attribute Title to '' and move them to the right of the Planets
-        Array.from(aMoons).forEach((el) => {
-            el.setAttribute('title', '');
-            el.style = 'left: 110px; top: 5px; position: absolute;';
-        });
-        // Get all MOON Icons by Class
-        let icnMoons = divPlanets.getElementsByClassName('icon-moon');
-        // For Each Moons in icnMoons sets the Attribute width & height to 18 to make them bigger
-        Array.from(icnMoons).forEach((el) => {
-            el.style.width = '20px';
-            el.style.height = '20px';
-        });
-        // Get all PLANET Icons by Class
-        let icnPlanets = divPlanets.getElementsByClassName('planetPic');
-        // For Each Moons in icnMoons sets the Attribute width & height to 18 to make them bigger
-        Array.from(icnPlanets).forEach((el) => {
-            el.style.width = '26px';
-            el.style.height = '26px';
-        });
-    }
-    // ******************************* End of Function to kill the ToolTips *******************************
-
-
-
-
-
-
     //*** MAIN ***
-
-    // ******************************* Functions to Custom CSS Generation *******************************
-    function create_CSS_Style(){
-        /*
-        let css = document.createElement('link');
-        css.setAttribute('type','text/css');
-        css.setAttribute('rel','stylesheet');
-        css.setAttribute('href','file://C:\OGame\oHelper\oh_style.css');
-        document.head.appendChild(css);
-        */
-        let css = document.createElement('style');
-        css.setAttribute('type','text/css');
-        css.innerHTML = `
-/* Custom CSS Styles for OGame Helper */
-
-.oh_Countdown_desc {
-  margin-left: 54px;
-  color: #6f9fc8;
-}
-
-.oh_Countdown_time {
-  margin-left: 54px;
-  color: #9c0!important;
-}
-
-.customMoonLink {
-  left: 110px;
-  top: 10px;
-  position: absolute;
-}
-
-div.customRSS_divMain {
-  width: 95%;
-  margin-left: 12px;
-}
-
-table.customRSS_tableMain {
-  width: 100%;
-  border: 0px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-
-table.customRSS_tableRes {
-  width: 50%;
-  cellspacing: 0px;
-  cellpadding: 0px;
-  border: 0px;
-}
-
-table td.customRSS_tableRes_Header {
-  text-align: center;
-  width: 50%;
-  padding: 2px 0px 2px 0px;
-  border: 1px solid #6f9fc8;
-  border-bottom: 0px;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-}
-
-span.customRSS_tableRes_Header {
-  font-size: 18px;
-  font-weight: bolder;
-  color: #ffffff;
-}
-
-table td.customRSS_tableRes_resName {
-  font-size: 12px;
-  text-align: center;
-  width: 33%;
-  font-weight: normal;
-  color: #6f9fc8;
-  padding: 2px 0px 2px 0px;
-  border-left: 1px solid #6f9fc8;
-  border-right: 1px solid #6f9fc8;
-}
-
-table td.customRSS_tableRes_resValue {
-  font-size: 11px;
-  text-align: center;
-  width: 33%;
-  font-weight: normal;
-  color: #9c0!important;
-  padding: 2px 0px 2px 0px;
-  border-left: 1px solid #6f9fc8;
-  border-right: 1px solid #6f9fc8;
-}
-
-div.localClock {
-  width: 100%;
-  text-align: right;
-  display: block;
-  color: #848484;
-  font-weight: 700;
-  font-size: 11px;
-}
-
-#rechts #myPlanets div.smallplanet a.moonlink .icon-moon {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    left: 0;
-    top: 10px;
-}
-
-#ohOverlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.8);
-    z-index: 2;
-}
-
-#ohOverlayDialog{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 14px;
-  color: white;
-  transform: translate(-50%,-50%);
-  background-color: rgba(0,0,0,1);
-  width: 600px;
-}
-
-#ohOverlayDialogClose:link, #ohOverlayDialogClose:visited {
-  background-color: #f44336;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-
-#ohOverlayDialogClose:hover, #ohOverlayDialogClose:active {
-  background-color: red;
-}
-
-#ohOverlayDialogClearCache:link, #ohOverlayDialogClearCache:visited {
-  background-color: #66CCFF;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-
-#ohOverlayDialogClearCache:hover, #ohOverlayDialogClearCache:active {
-  background-color: #6699FF;
-}
-
-.ohDepotTimeSpanGreen{
-position: relative;
-top: 10px;
-font-size: 10px;
-color: #00cc00;
-}
-
-.ohDepotTimeSpanYellow{
-position: relative;
-top: 10px;
-font-size: 10px;
-color: #ffff00;
-}
-
-.ohDepotTimeSpanRed{
-position: relative;
-top: 10px;
-font-size: 10px;
-color: #ff0000;
-}
-
-`;
-
-        document.head.appendChild(css);
-
-    }
-    // ******************************* End of Functions to Custom CSS Generation *******************************
-
     function set_MainObserver() {
         // Options for the observer (which mutations to observe)
         const mainObserverConfig = { attributes: true, childList: true, subtree: true };
@@ -354,47 +130,16 @@ color: #ff0000;
 
     }
 
-    /*function addDebugControl() {
-        const rightPanel = document.getElementById('rechts');
-        if ( ! isNullOrEmpty(rightPanel) ) {
-          let dbgDiv = document.createElement('div');
-          let dbgCheckBox = document.createElement('input');
-          let dbgLabel = document.createElement('label');
-
-          dbgDiv.setAttribute('id', 'debugDiv');
-
-          dbgCheckBox.setAttribute('type', 'checkbox');
-          dbgCheckBox.setAttribute('id', 'debugChbx');
-          dbgCheckBox.setAttribute('name', 'debugChbx');
-          dbgCheckBox.addEventListener('click', setEnableDebugLog, false);
-          // Getting SessionStorage Value for Debugging Status
-          dbgCheckBox.checked = sessionStorage.getItem('debug') == 'true' ? true:false;
-
-          dbgLabel.setAttribute('for', 'debug');
-          dbgLabel.setAttribute('style', 'color: #9c0; font-size: 10px; position: relative; top: -3px; left: 5px;');
-          dbgLabel.addEventListener('click', setEnableDebugLog, false);
-          dbgLabel.innerHTML = 'Abilita Debug';
-
-          dbgDiv.appendChild(dbgCheckBox);
-          dbgDiv.appendChild(dbgLabel);
-
-          rightPanel.insertBefore(dbgDiv, document.getElementById('cutty'));
-        }
-    }*/
-
     //Script runs only with ogame pages
     if (location.href.indexOf('.ogame.gameforge.com') != -1) {
+      // Adding CSS Resources for Script Implementations
+      create_CSS_Style();
+
         // Adding the button in the left buttons list menu
         addToLeftMenuButtons();
 
         // Setting Last Refresh Page Time
         lastRefresh = new Date();
-
-        // Adding CSS Resources for Script Implementations
-        create_CSS_Style();
-
-        // Adding CheckBox to Enable Debugging
-        //addDebugControl();
 
         // Setting Planet List Style
         set_PlanetListStyle();
