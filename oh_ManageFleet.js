@@ -136,3 +136,56 @@ function manageFleet(){
   observer1.observe(target2, { attributes : true, attributeFilter : ['style'] });
   observer2.observe(target3, { attributes : true, attributeFilter : ['style'] });
 }
+
+function createResAndNavToolbar(){
+  /*let oDivTB = document.createElement('div');
+  oDivTB.setAttribute('id', 'oh_ResAndNavToolbar');*/
+  let strDivTB =`
+  <div id='oh_ResAndNavToolbar'>
+  aa
+    <table border="0" width="100%" cellpadding="0px" cellspacing="0px">
+      <tr>
+        <td>
+          <a href='#'><img src="https://gf2.geo.gfsrv.net/cdndf/3e567d6f16d040326c7a0ea29a4f41.gif" width="22" height="22"></a>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <table>
+            <tr>
+              <td><div class='resourceIcon metal'></div></td>
+              <td>&nbsp;</td>
+              <td><div class='resourceIcon crystal'></div></td>
+              <td>&nbsp;</td>
+              <td><div class='resourceIcon deuterium'></div></td>
+            </tr>
+            <tr>
+              <td><br><input type="text" id="ohTBMetal"></td>
+              <td>&nbsp;</td>
+              <td><br><input type="text" id="ohTBCrystal"></td>
+              <td>&nbsp;</td>
+              <td><br><input type="text" id="ohTBDeuterium"></td>
+            </tr>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <!--div id='oh_ResAndNavToolbar' class="fleetStatus" align="center">
+    <div>
+      <div class='resourceIcon metal'></div>
+      <div class='resourceIcon crystal'></div>
+      <div class='resourceIcon deuterium'></div>
+    </div>
+  </div-->
+  `;
+  let oDivTB = htmlToElement(strDivTB);
+
+  let oDivInhalt = document.getElementById('inhalt');
+  oDivInhalt.insertBefore(oDivTB, document.getElementById('buttonz'));
+}
+
+function modifyFleet1Layer(){
+  //createResAndNavToolbar();
+  replaceContinueToFleet2Button();
+  changeFleet1ShipsStyle();
+}
