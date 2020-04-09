@@ -49,7 +49,6 @@ function _showDepotTimeRemaining(depotName){
     }
 
     let showPercentage = get_OptionValue('ohShowDepotTimeChbx');
-    console.log("AAA -" + showPercentage);
     if(showPercentage == 'true')
       oSpan.innerHTML = curPercentage + '%';// hours + 'h ' + minutes + 'm';
     else

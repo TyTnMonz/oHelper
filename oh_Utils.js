@@ -365,3 +365,14 @@ function killPlanetsMoon_Tooltip() {
   });
 }
 // ******************************* End of Function to kill the ToolTips *******************************
+
+// ******************************* Start of Function to read plasma tech *******************************
+function getPlasmaTech(){
+  //let techDiv = document.getElementById('technologies_basic');
+  //let ulIcons = techDiv.getElementsByClassName('icons')[0];
+  let liPT = document.getElementsByClassName('technology plasmaTechnology')[0];
+  let techLvl = liPT.childNodes[0].childNodes[0].getAttribute('data-value');
+  console.log(techLvl);
+  set_SimpleValue(techLvl, 'ohPasmaTechnology');
+}
+// ******************************* End of Function to read plasma tech  *******************************

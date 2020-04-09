@@ -2,19 +2,19 @@ const oh_saveSettingLocation = { local: 'l', session: 's' };
 
 function get_OptionValue(pKey, pLocal = oh_saveSettingLocation.local) {
   pKey = `${universe}.${pKey}`;
-  console.log(`Getting Option Key [${pKey}]`);
+  //console.log(`Getting Option Key [${pKey}]`);
   if ( pLocal == oh_saveSettingLocation.local ) {
-    console.log(`Key Value [${localStorage.getItem(pKey)}]`);
+    //console.log(`Key Value [${localStorage.getItem(pKey)}]`);
     return localStorage.getItem(pKey);
   } else {
-    console.log(`Key Value [${sessionStorage.getItem(pKey)}]`);
+    //console.log(`Key Value [${sessionStorage.getItem(pKey)}]`);
     return sessionStorage.getItem(pKey);
   }
 }
 
 function set_OptionValue(pOption, pKey, pLocal = oh_saveSettingLocation.local) {
     pKey = `${universe}.${pKey}`;
-    console.log(`Setting Option [${pOption}] with Key [${pKey}]`);
+    //console.log(`Setting Option [${pOption}] with Key [${pKey}]`);
     let oOption = document.getElementById(pOption);
     if ( ! isNullOrEmpty(oOption) ) {
       if ( pLocal == oh_saveSettingLocation.local ) {
@@ -22,8 +22,21 @@ function set_OptionValue(pOption, pKey, pLocal = oh_saveSettingLocation.local) {
       } else {
         sessionStorage.setItem(pKey, oOption.checked);
       }
-      console.log(`Key [${pKey}] for Option [${pOption}] set to ${ pLocal == oh_saveSettingLocation.local ? 'localStorage':'sessionStorage' } with value [${oOption.checked}]`);
+      //console.log(`Key [${pKey}] for Option [${pOption}] set to ${ pLocal == oh_saveSettingLocation.local ? 'localStorage':'sessionStorage' } with value [${oOption.checked}]`);
     }
+}
+
+function set_SimpleValue(pValue, pKey, pLocal = oh_saveSettingLocation.local){
+  pKey = `${universe}.${pKey}`;
+  console.log(`Setting Value [${pValue}] with Key [${pKey}]`);
+  if ( ! isNullOrEmpty(pValue) ) {
+    if ( pLocal == oh_saveSettingLocation.local ) {
+      localStorage.setItem(pKey, pValue);
+    } else {
+      sessionStorage.setItem(pKey, pValue);
+    }
+    console.log(`Key [${pKey}] for Value [${pValue}] set to ${ pLocal == oh_saveSettingLocation.local ? 'localStorage':'sessionStorage' } with value [${pValue}]`);
+  }
 }
 
 function addToLeftMenuButtons(){
@@ -150,7 +163,6 @@ function buildOverlayDialog(ohOverlayDialog){
   /*********************************************/
   let p = document.createElement('p');
   p.innerHTML = "<br><br>";
-  //cellLeft.appendChild(document.createElement('p'));
   cellLeft.appendChild(p);
   /*********************************************/
 
