@@ -122,10 +122,13 @@
   }
 
   function set_PlanetListStyle() {
-    const oPlanetList = document.getElementsByClassName('icon-moon');
-    Array.from(oPlanetList).forEach((element) => {
-      element.setAttribute('style', 'left: 0px !important; top: 0px !important; position: absolute;');
-    });
+    // If Function enabled
+    if ( get_OptionValue('ohApplyCSS') == 'true' ) {
+      const oPlanetList = document.getElementsByClassName('icon-moon');
+      Array.from(oPlanetList).forEach((element) => {
+        element.setAttribute('style', 'left: 0px !important; top: 0px !important; position: absolute;');
+      });
+    }
   }
 
   //Script runs only with ogame pages
