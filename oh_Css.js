@@ -163,6 +163,11 @@ function create_CSS_Style(){
   top: 10px;
   font-size: 10px;
   color: #ff0000;
+
+  #oh_ResAndNavToolbar div{
+    padding-left: 100px;
+    color: red;
+  }
   }`;
 
   document.head.appendChild(css);

@@ -213,8 +213,7 @@
                 case 'fleetdispatch':
                     // Enabling Fleet Dispatch Timers changes
                     onFleetDispatchPage = true;
-                    replaceContinueToFleet2Button();
-                    changeFleet1ShipsStyle();
+                    modifyFleet1Layer();
                     manageFleet();
                     break;
                 case 'galaxy':
