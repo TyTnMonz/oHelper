@@ -196,7 +196,7 @@ function buildOverlayDialog(ohOverlayDialog){
   dbgLabel.setAttribute('for', 'ohApplyCSS');
   dbgLabel.setAttribute('style', 'color: #9c0; font-size: 18px; position: relative; top: -3px; left: 5px;');
   dbgLabel.addEventListener('click', function(){ set_OptionValue('ohApplyCSS', 'ohApplyCSS'); }, false);
-  dbgLabel.innerHTML = 'Abilita CSS';
+  dbgLabel.innerHTML = 'Abilita CSS Custom per Lista Pianeti';
   cellLeft.appendChild(dbgCheckBox);
   cellLeft.appendChild(dbgLabel);
 

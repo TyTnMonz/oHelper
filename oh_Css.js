@@ -174,7 +174,7 @@ function create_CSS_Style(){
         left: 0;
         top: 10px;
     }`;
-
+  }
 
   document.head.appendChild(css);
 
