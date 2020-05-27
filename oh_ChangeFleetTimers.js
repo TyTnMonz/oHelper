@@ -79,71 +79,77 @@ function set_callBackTime(el, oDate) {
 }
 
 function changeFleetMovementsTimers(doEverythings = true) {
-  // Getting mainDiv for Fleet Movements
-  let mainDiv = document.getElementById('inhalt');
-  getPrintDebugLog('sto cambiando i timer dei movimenti flotta');
-  if ( ! isNullOrEmpty(mainDiv) ) {
-    // Getting all the Fleet Movement lines
-    let fleetDetails = mainDiv.getElementsByClassName('fleetDetails');
-    if ( ! isNullOrEmpty(fleetDetails) ) {
-      let fleetMov;
-      let timerElement;
-      // For Each Fleet Movement
-      Array.from(fleetDetails).forEach((el) => {
-        // Creating the Object to manage the single Fleet Movement
-        getPrintDebugLog(`Fleet ID : ${get_AttributeFromDOM(el, 'id')}`);
-        fleetMov = new clsFleetMov(get_AttributeFromDOM(el, 'id'));
-        // Settings all the Datas inside the Object
-        getPrintDebugLog(`data-return-flight : ${el.getAttribute('data-return-flight')}`);
-        fleetMov.data_return = get_AttributeFromDOM(el, 'data-return-flight');
+  // If Function enabled
+  if ( get_OptionValue('ohChangeTimers') == 'true' ) {
 
-        if ( fleetMov.isOnWayBack == true ) {
+    // Getting mainDiv for Fleet Movements
+    let mainDiv = document.getElementById('inhalt');
+    getPrintDebugLog('sto cambiando i timer dei movimenti flotta');
+    if ( ! isNullOrEmpty(mainDiv) ) {
+      // Getting all the Fleet Movement lines
+      let fleetDetails = mainDiv.getElementsByClassName('fleetDetails');
+      if ( ! isNullOrEmpty(fleetDetails) ) {
+        let fleetMov;
+        let timerElement;
+        // For Each Fleet Movement
+        Array.from(fleetDetails).forEach((el) => {
+          // Creating the Object to manage the single Fleet Movement
+          getPrintDebugLog(`Fleet ID : ${get_AttributeFromDOM(el, 'id')}`);
+          fleetMov = new clsFleetMov(get_AttributeFromDOM(el, 'id'));
+          // Settings all the Datas inside the Object
+          getPrintDebugLog(`data-return-flight : ${el.getAttribute('data-return-flight')}`);
+          fleetMov.data_return = get_AttributeFromDOM(el, 'data-return-flight');
 
-          // Fleet is on his way back, only ont DateTime to grab
-          getPrintDebugLog(`Fleet ${fleetMov.fleet_id} is on his way back, only ont DateTime to grab`);
-          timerElement = el.getElementsByClassName('origin fixed');
-          if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
-          getPrintDebugLog(`origin fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
-          fleetMov.arrival_datetime = get_AttributeFromDOM(timerElement, 'Title');
+          if ( fleetMov.isOnWayBack == true ) {
 
-        } else {
+            // Fleet is on his way back, only ont DateTime to grab
+            getPrintDebugLog(`Fleet ${fleetMov.fleet_id} is on his way back, only ont DateTime to grab`);
+            timerElement = el.getElementsByClassName('origin fixed');
+            if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
+            getPrintDebugLog(`origin fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
+            fleetMov.arrival_datetime = get_AttributeFromDOM(timerElement, 'Title');
 
-          // Fleet is on his way out
-          getPrintDebugLog(`Fleet ${fleetMov.fleet_id} is on his way out`);
-          timerElement = el.getElementsByClassName('origin fixed');
-          if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
-          getPrintDebugLog(`origin fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
-          fleetMov.starting_datetime = get_AttributeFromDOM(timerElement, 'Title');
+          } else {
 
-          timerElement = el.getElementsByClassName('destination fixed');
-          if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
-          getPrintDebugLog(`destination fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
-          fleetMov.arrival_datetime = get_AttributeFromDOM(timerElement, 'Title');
+            // Fleet is on his way out
+            getPrintDebugLog(`Fleet ${fleetMov.fleet_id} is on his way out`);
+            timerElement = el.getElementsByClassName('origin fixed');
+            if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
+            getPrintDebugLog(`origin fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
+            fleetMov.starting_datetime = get_AttributeFromDOM(timerElement, 'Title');
 
-          fleetMov.mission_end_datetime = get_AttributeFromDOM(el.getElementsByClassName('nextTimer tooltip'), 'Title');
+            timerElement = el.getElementsByClassName('destination fixed');
+            if ( isOne(timerElement) ) { timerElement = timerElement[0].getElementsByClassName('tooltipHTML'); }
+            getPrintDebugLog(`destination fixed Title: ${get_AttributeFromDOM(timerElement, 'Title')}`);
+            fleetMov.arrival_datetime = get_AttributeFromDOM(timerElement, 'Title');
 
-        }
+            fleetMov.mission_end_datetime = get_AttributeFromDOM(el.getElementsByClassName('nextTimer tooltip'), 'Title');
 
-        // Only if changeTime is needed
-        if ( oh_timeDiff_h != 0 && doEverythings == true ) {
-
-          // Setting Converted ARRIVAL Time inside the DOM
-          set_absTime(el, fleetMov.arrival_datetime);
-          if ( fleetMov.isOnWayBack == false ) {
-            // Set Converted END OF MISSION Time
-            set_nextAbsTime(el, fleetMov.mission_end_datetime);
           }
-        }
 
-        // Always when not Flett isOnWayBack
-        if ( fleetMov.isOnWayBack == false ) {
-          // Set Converted CALL BACK Time
-          set_callBackTime(el, fleetMov.recall_datetime);
-        }
+          // Only if changeTime is needed
+          if ( oh_timeDiff_h != 0 && doEverythings == true ) {
 
-      });
+            // Setting Converted ARRIVAL Time inside the DOM
+            set_absTime(el, fleetMov.arrival_datetime);
+            if ( fleetMov.isOnWayBack == false ) {
+              // Set Converted END OF MISSION Time
+              set_nextAbsTime(el, fleetMov.mission_end_datetime);
+            }
+          }
+
+          // Always when not Flett isOnWayBack
+          if ( fleetMov.isOnWayBack == false ) {
+            // Set Converted CALL BACK Time
+            set_callBackTime(el, fleetMov.recall_datetime);
+          }
+
+        });
+      }
     }
+
   }
+
 }
 
 //***************************** End of Functions to change DateTime inside INAHLT of Page [page=ingame&component=movement] ***************************

@@ -161,6 +161,26 @@ function buildOverlayDialog(ohOverlayDialog){
   cellLeft.appendChild(dbgLabel);
 
   /*********************************************/
+  cellLeft.appendChild(document.createElement('p'));
+  /*********************************************/
+
+  dbgCheckBox = document.createElement('input');
+  dbgLabel = document.createElement('label');
+  dbgCheckBox.setAttribute('type', 'checkbox');
+  dbgCheckBox.setAttribute('id', 'ohChangeTimers');
+  dbgCheckBox.setAttribute('name', 'ohChangeTimers');
+  dbgCheckBox.addEventListener('click', function(){ set_OptionValue('ohChangeTimers', 'ohChangeTimers'); }, false);
+  // Getting SessionStorage Value for Debugging Status
+  dbgCheckBox.checked = get_OptionValue('ohChangeTimers') == 'true' ? true:false;
+
+  dbgLabel.setAttribute('for', 'ohChangeTimers');
+  dbgLabel.setAttribute('style', 'color: #9c0; font-size: 18px; position: relative; top: -3px; left: 5px;');
+  dbgLabel.addEventListener('click', function(){ set_OptionValue('ohChangeTimers', 'ohChangeTimers'); }, false);
+  dbgLabel.innerHTML = 'Abilita Modifica Timer sul Fuso Orario locale';
+  cellLeft.appendChild(dbgCheckBox);
+  cellLeft.appendChild(dbgLabel);
+
+  /*********************************************/
   let p = document.createElement('p');
   p.innerHTML = "<br><br>";
   cellLeft.appendChild(p);
