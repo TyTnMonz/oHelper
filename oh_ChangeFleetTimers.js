@@ -157,24 +157,27 @@ function changeFleetMovementsTimers(doEverythings = true) {
 //***************************** Function to change Arrival DateTime of the [eventboxContent] ***************************
 
 function changeEventBoxTimers() {
-  const eventBox = document.getElementById('eventboxContent');
-  if ( isNullOrEmpty(eventBox) ) { return; }
-  const eventFleetList = eventBox.getElementsByClassName('eventFleet');
-  if ( isNullOrEmpty(eventFleetList) ) { return; }
-  // For Each Fleet Movement
-  let fleetEvent;
-  let fleetEventCountdown;
-  let fleetEventArrivalDateTime;
-  Array.from(eventFleetList).forEach((el) => {
-    fleetEventCountdown = el.getElementsByClassName('textBeefy');
-    if ( isOne(fleetEventCountdown) ) { fleetEventCountdown = fleetEventCountdown[0].innerHTML; }
-    const fleetEventArrivalDateTime = get_DateTimeAfterCountdown(fleetEventCountdown);
-    fleetEvent = el.getElementsByClassName('arrivalTime');
-    if ( isOne(fleetEvent) ) {
-      fleetEvent[0].setAttribute('original', fleetEvent[0].innerHTML);
-      fleetEvent[0].innerHTML = get_FormattedTime(fleetEventArrivalDateTime);
-    }
-  });
+  // If Function enabled
+  if ( get_OptionValue('ohChangeTimers') == 'true' ) {
+    const eventBox = document.getElementById('eventboxContent');
+    if ( isNullOrEmpty(eventBox) ) { return; }
+    const eventFleetList = eventBox.getElementsByClassName('eventFleet');
+    if ( isNullOrEmpty(eventFleetList) ) { return; }
+    // For Each Fleet Movement
+    let fleetEvent;
+    let fleetEventCountdown;
+    let fleetEventArrivalDateTime;
+    Array.from(eventFleetList).forEach((el) => {
+      fleetEventCountdown = el.getElementsByClassName('textBeefy');
+      if ( isOne(fleetEventCountdown) ) { fleetEventCountdown = fleetEventCountdown[0].innerHTML; }
+      const fleetEventArrivalDateTime = get_DateTimeAfterCountdown(fleetEventCountdown);
+      fleetEvent = el.getElementsByClassName('arrivalTime');
+      if ( isOne(fleetEvent) ) {
+        fleetEvent[0].setAttribute('original', fleetEvent[0].innerHTML);
+        fleetEvent[0].innerHTML = get_FormattedTime(fleetEventArrivalDateTime);
+      }
+    });
+  }
 }
 
 //***************************** End of Function to change Arrival DateTime of the [eventboxContent] ***************************
@@ -201,62 +204,65 @@ function disableSpeedBar() {
 }
 
 function changeFleetDispatchDateTime() {
-  // Getting page Element to understand where we are
-  const fleetDispatch_Page2 = document.getElementById('fleet2');
-  if ( isNullOrEmpty(fleetDispatch_Page2) ) { return; }
-  const fleetDispatch_Page3 = document.getElementById('fleet3');
-  if ( isNullOrEmpty(fleetDispatch_Page3) ) { return; }
-  // Looking the state of Page2
-  const fleetDispatch_Page2_Style = fleetDispatch_Page2.getAttribute('style');
-  const fleetDispatch_Page3_Style = fleetDispatch_Page3.getAttribute('style');
-  if ( fleetDispatch_Page2_Style != 'display: none;' || fleetDispatch_Page3_Style != 'display: none;') {
-    // Fleet Dispatch Page 2 or 3 is shown...which one?
-    let tagList;
-    // Flight duration...shared between the 2 pages but the one inside Page 2 is dinamic
-    let flyghtDuration = document.getElementById('duration');
-    if ( ! isNullOrEmpty(flyghtDuration) ) { flyghtDuration = flyghtDuration.innerHTML.replace(' h', '').split(':'); }
-    if ( ! isNullOrEmpty(flyghtDuration) && flyghtDuration.length == 3 ) {
-      // Calculating arrivalDateTime and returnDateTime
-      let arrivalDateTime = get_FormattedDateTimeNoYear(get_DispatchDate(flyghtDuration[0], flyghtDuration[1], flyghtDuration[2]));
-      let returnDateTime = get_FormattedDateTimeNoYear(get_DispatchDate(flyghtDuration[0] * 2, flyghtDuration[1] * 2, flyghtDuration[2] * 2));
-      // Looking at which page we are in
-      if ( fleetDispatch_Page2_Style != 'display: none;' ) {
-          // We are in Fleet Dispatch Page 2 - Getting his List of [ Briefing Tag ] with class = 'value'
-          tagList = fleetDispatch_Page2.getElementsByClassName('value');
-          // Setting Event Listener over Speed Bar to disable it temorarly after click
-          speedBar = document.getElementById('speedPercentage');
-          if ( ! isNullOrEmpty(speedBar) ) {
-            speedBar.removeEventListener('click', disableSpeedBar);
-            speedBar.addEventListener('click', disableSpeedBar, false);
-          }
-      }
-      if ( fleetDispatch_Page3_Style != 'display: none;' ) {
-          // We are in Fleet Dispatch Page 3 - Getting his List of [ Briefing Tag ] with class = 'value'
-          tagList = fleetDispatch_Page3.getElementsByClassName('value');
-      }
-      if ( ! isNullOrEmpty(tagList) ) {
-        // Iterating on each Briefing Tag looking at their child to find what we need to change :
-        // arrivalTime and returnTime span tag
-        let childList;
-        Array.from(tagList).forEach((el) => {
-            childList = el.childNodes;
-            if ( isNullOrEmpty(childList) ) { return; }
-            Array.from(childList).forEach((child) => {
-              // Iterating on children list
-              if ( child.id == 'arrivalTime' || child.id == 'oh_arrivalTime' ) {
-                // change ID to stop Ogame Original Auto Update
-                child.id = 'oh_arrivalTime';
-                // Overwriting the innerHTML whit formatted datetime
-                child.innerHTML = arrivalDateTime;
-              }
-              if ( child.id == 'returnTime' || child.id == 'oh_returnTime' ) {
-                // change ID to stop Ogame Original Auto Update
-                child.id = 'oh_returnTime';
-                // Overwriting the innerHTML whit formatted datetime
-                child.innerHTML = returnDateTime;
-              }
-            });
-        });
+  // If Function enabled
+  if ( get_OptionValue('ohChangeTimers') == 'true' ) {
+    // Getting page Element to understand where we are
+    const fleetDispatch_Page2 = document.getElementById('fleet2');
+    if ( isNullOrEmpty(fleetDispatch_Page2) ) { return; }
+    const fleetDispatch_Page3 = document.getElementById('fleet3');
+    if ( isNullOrEmpty(fleetDispatch_Page3) ) { return; }
+    // Looking the state of Page2
+    const fleetDispatch_Page2_Style = fleetDispatch_Page2.getAttribute('style');
+    const fleetDispatch_Page3_Style = fleetDispatch_Page3.getAttribute('style');
+    if ( fleetDispatch_Page2_Style != 'display: none;' || fleetDispatch_Page3_Style != 'display: none;') {
+      // Fleet Dispatch Page 2 or 3 is shown...which one?
+      let tagList;
+      // Flight duration...shared between the 2 pages but the one inside Page 2 is dinamic
+      let flyghtDuration = document.getElementById('duration');
+      if ( ! isNullOrEmpty(flyghtDuration) ) { flyghtDuration = flyghtDuration.innerHTML.replace(' h', '').split(':'); }
+      if ( ! isNullOrEmpty(flyghtDuration) && flyghtDuration.length == 3 ) {
+        // Calculating arrivalDateTime and returnDateTime
+        let arrivalDateTime = get_FormattedDateTimeNoYear(get_DispatchDate(flyghtDuration[0], flyghtDuration[1], flyghtDuration[2]));
+        let returnDateTime = get_FormattedDateTimeNoYear(get_DispatchDate(flyghtDuration[0] * 2, flyghtDuration[1] * 2, flyghtDuration[2] * 2));
+        // Looking at which page we are in
+        if ( fleetDispatch_Page2_Style != 'display: none;' ) {
+            // We are in Fleet Dispatch Page 2 - Getting his List of [ Briefing Tag ] with class = 'value'
+            tagList = fleetDispatch_Page2.getElementsByClassName('value');
+            // Setting Event Listener over Speed Bar to disable it temorarly after click
+            speedBar = document.getElementById('speedPercentage');
+            if ( ! isNullOrEmpty(speedBar) ) {
+              speedBar.removeEventListener('click', disableSpeedBar);
+              speedBar.addEventListener('click', disableSpeedBar, false);
+            }
+        }
+        if ( fleetDispatch_Page3_Style != 'display: none;' ) {
+            // We are in Fleet Dispatch Page 3 - Getting his List of [ Briefing Tag ] with class = 'value'
+            tagList = fleetDispatch_Page3.getElementsByClassName('value');
+        }
+        if ( ! isNullOrEmpty(tagList) ) {
+          // Iterating on each Briefing Tag looking at their child to find what we need to change :
+          // arrivalTime and returnTime span tag
+          let childList;
+          Array.from(tagList).forEach((el) => {
+              childList = el.childNodes;
+              if ( isNullOrEmpty(childList) ) { return; }
+              Array.from(childList).forEach((child) => {
+                // Iterating on children list
+                if ( child.id == 'arrivalTime' || child.id == 'oh_arrivalTime' ) {
+                  // change ID to stop Ogame Original Auto Update
+                  child.id = 'oh_arrivalTime';
+                  // Overwriting the innerHTML whit formatted datetime
+                  child.innerHTML = arrivalDateTime;
+                }
+                if ( child.id == 'returnTime' || child.id == 'oh_returnTime' ) {
+                  // change ID to stop Ogame Original Auto Update
+                  child.id = 'oh_returnTime';
+                  // Overwriting the innerHTML whit formatted datetime
+                  child.innerHTML = returnDateTime;
+                }
+              });
+          });
+        }
       }
     }
   }
