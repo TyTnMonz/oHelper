@@ -15,12 +15,6 @@ function create_CSS_Style(){
     color: #9c0!important;
   }
 
-  .customMoonLink {
-    left: 110px;
-    top: 10px;
-    position: absolute;
-  }
-
   div.customRSS_divMain {
     width: 95%;
     margin-left: 12px;
@@ -166,14 +160,21 @@ function create_CSS_Style(){
   `;
 
   if ( get_OptionValue('ohApplyCSS') == 'true' ) {
-    css.innerHTML =   css.innerHTML + `
+    css.innerHTML = css.innerHTML + `
       #rechts #myPlanets div.smallplanet a.moonlink .icon-moon {
         width: 20px;
         height: 20px;
         position: relative;
         left: 0;
         top: 10px;
-    }`;
+      }
+
+      .customMoonLink {
+        left: 110px;
+        top: 10px;
+        position: absolute;
+      }
+      `;
   }
 
   document.head.appendChild(css);
