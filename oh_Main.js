@@ -149,9 +149,12 @@
     // Setting Planet List Style
     set_PlanetListStyle();
 
-    // Setting Additional Clock on Current Local Time if needed
-    oh_timeDiff_h = localTime.getHours() - serverTime.getHours();
-    if ( oh_timeDiff_h != 0 ) { add_LocalClock(); }
+    // If Function enabled
+    if ( get_OptionValue('ohChangeTimers') == 'true' ) {
+      // Setting Additional Clock on Current Local Time if needed
+      oh_timeDiff_h = localTime.getHours() - serverTime.getHours();
+      if ( oh_timeDiff_h != 0 ) { add_LocalClock(); }
+    }
 
     // Setting up Main Observer
     set_MainObserver();
